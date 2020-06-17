@@ -9,14 +9,15 @@ class App extends React.Component {
 
     };
   }
+
   render() {
     return (
       <div>
-        <AlbumList type={'album'}/>
-        <AlbumList type={'single or EP'}/>
+        <AlbumList type="album" />
+        <AlbumList type="single or EP" />
         {/* fix the single or EP type thing to take either of the types */}
-        <AlbumList type={'collection'}/>
-        <AlbumList type={'appears on'}/>
+        <AlbumList type="collection" />
+        <AlbumList type="appears on" />
       </div>
     );
   }
