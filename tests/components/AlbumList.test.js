@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
-import AlbumList from '../AlbumList';
-// fix the file path for albumlist
+import AlbumList from '../../client/components/AlbumList/AlbumList.jsx';
 
-// import { isTSAnyKeyword } from '@babel/types';
-
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDom.render(<AlbumList />, div);
-  // not working with jsx for some reason, also need to add in a test script
-});
+describe('AlbumList', () => {
+  it('has album as a prop', () => {
+    // fill in test later
+  });
+  it('renders without crashing', () => {
+    const wrapper = shallow(<AlbumList />);
+    // make sure that as we add more props to album we ensure that they are correct here
+    // console.log('album is', wrapper);
+    expect(wrapper.exists()).toBe(true);
+  });
+})
