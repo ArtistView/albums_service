@@ -11,6 +11,6 @@ app.use(bodyParser());
 app.use(cors());
 // need to instantiate the database and then promisify
 
-app.listen(PORT, ()=>{
+app.listen(PORT, () => {
   console.log('listening on port', PORT);
-})
+});
