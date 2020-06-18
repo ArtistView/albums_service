@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import AlbumList from './components/AlbumList.jsx';
+import AlbumList from './components/AlbumList/AlbumList.jsx';
 
 class App extends React.Component {
   constructor(props) {
