@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
 import AlbumList from '../AlbumList';
+// fix the file path for albumlist
 
 // import { isTSAnyKeyword } from '@babel/types';
 
