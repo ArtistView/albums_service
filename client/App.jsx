@@ -66,7 +66,7 @@ class App extends React.Component {
   render() {
     if (this.state.isLoaded) {
       return (
-        <div>
+        <div id="main-albums-wrapper">
           <AlbumList type="Albums" albums={this.state.albums} />
           <AlbumList type="Singles and EPs" albums={this.state.albums} />
           {/* fix the single or EP type thing to take either of the types */}

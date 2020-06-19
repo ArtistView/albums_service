@@ -9,7 +9,7 @@ const Album = (props) => {
       {/* <script src="./Album.css" /> */}
       <img id="album-cover" src={props.album.imageUrl} alt="" />
       {/* need a hovering play button that goes over the image and appears on hover onClick for the play button should call ()=>{props.onClick(props.album.firstSong)} */}
-      <div className="albumtitle">
+      <div id="album-title">
         {props.album.title}
       </div>
     </div>
