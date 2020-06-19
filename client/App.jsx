@@ -70,7 +70,7 @@ class App extends React.Component {
           <AlbumList type="Albums" albums={this.state.albums} />
           <AlbumList type="Singles and EPs" albums={this.state.albums} />
           {/* fix the single or EP type thing to take either of the types */}
-          <AlbumList type="Collections" albums={this.state.albums} />
+          <AlbumList type="Compilations" albums={this.state.albums} />
           <AlbumList type="Appears On" albums={this.state.features} />
         </div>
       );

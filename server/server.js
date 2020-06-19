@@ -66,12 +66,16 @@ app.get('/albums/byId/:albumId', (req, res) => {
 //   console.log('cool');
 //   });
 // }
+// var types = ['album', 'single', 'EP', 'compilation'];
 // app.get('/songs', (req, res) => {
-//   db.Song.find()
+//   db.Album.find()
 //     .then((data) => {
 //       for (var item of data) {
-//         console.log(item.albumId);
-//         db.Album.updateOne({ _id: item.albumId },{$push: {songs: item._id}},{},(album)=>{
+//         // console.log(item);
+//         var randIndex = Math.floor(Math.random()*(types.length -1));
+//         var randType = types[randIndex];
+//         // console.log(randType);
+//         db.Album.updateOne({ _id: item._id },{type: randType},{},(album)=>{
 //           console.log('album found', album)
 //         });
 //         // .then((album)=> {

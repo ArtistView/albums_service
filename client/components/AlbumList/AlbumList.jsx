@@ -31,7 +31,7 @@ class AlbumList extends React.Component {
       }
     } else {
       for (var album of this.props.albums) {
-        if (album.type === 'collaboration') {
+        if (album.type === 'compilation') {
           albumsOfType.push(album);
         }
       }
