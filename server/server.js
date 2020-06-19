@@ -2,8 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Promise = require('bluebird');
+
 const PORT = 3273;
 const app = express();
+// const albums = require('./routes/albumRouter');
+// router is breaking rn so I'm just writing the route in here directly
+// console.log('albums', albums);
 
 app.use(express.static('public'));
 // add in express static for the public folder
@@ -11,9 +15,39 @@ app.use(bodyParser());
 app.use(cors());
 // need to instantiate the database and then promisify
 const db = require('../database/db.js');
-const artists = require('../../top_songs_service/Songs.js');
+// const artists = require('../../top_songs_service/Songs.js');
 
 Promise.promisifyAll(require('mongoose'));
+
+// app.use('/albums', albums);
+
+app.get('/albums/:artistId', (req, res) => {
+  // console.log('running request', req.params);
+  // try to refactor this to get into router later but for now it works
+  // also add tests
+  db.Album.find({ artistId: req.params.artistId })
+    .then((albums) => {
+      res.send(albums);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+app.get('/albums/features/:artistId', (req, res) => {
+  console.log('running request', req.params);
+  // try to refactor this to get into router later but for now it works
+  // also add tests
+  db.Album.find({ featuredArtists: req.params.artistId })
+    .then((albums) => {
+      // console.log('in the then', albums);
+      res.send(albums);
+    })
+    .catch((err) => {
+      // console.log(err);
+      res.send(err);
+    });
+});
+// code below was used for populating database, prob not needed but I'll leave it for now
 // console.log(artists[0], artists[1]);
 // for (var artist of artists) {
 //   var artist1 = new db.Song(artist);
