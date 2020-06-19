@@ -5,7 +5,7 @@ const Album = (props) => {
   console.log(props);
   // adding this comment to test circle
   return (
-    <div className="album" id={props.album.key}>
+    <div className="album" id={props.key}>
       Hello World
       <image src={props.album.imageUrl}> </image>
       {/* need a hovering play button that goes over the image and appears on hover onClick for the play button should call ()=>{props.onClick(props.album.firstSong)} */}
