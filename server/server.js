@@ -68,26 +68,17 @@ app.get('/albums/byId/:albumId', (req, res) => {
 // }
 // var types = ['album', 'single', 'EP', 'compilation'];
 // app.get('/songs', (req, res) => {
-//   db.Album.find()
+//   db.Song.find()
 //     .then((data) => {
-//       for (var item of data) {
-//         // console.log(item);
-//         var randIndex = Math.floor(Math.random()*(types.length -1));
-//         var randType = types[randIndex];
-//         // console.log(randType);
-//         db.Album.updateOne({ _id: item._id },{type: randType},{},(album)=>{
-//           console.log('album found', album)
-//         });
-//         // .then((album)=> {
-//         //   console.log(album[0], item._id, album[0].songs);
-//         //   album[0].songs.push(item._id);
-//         // })
-//         // .catch((err)=>{
-//         //   res.send(err);
-//         // }); // { $push: {songs: item._id} });
-//       }
-//       res.send('done');
+//       res.send(data);
 //     });
+//   // .then((album)=> {
+//   //   console.log(album[0], item._id, album[0].songs);
+//   //   album[0].songs.push(item._id);
+//   // })
+//   // .catch((err)=>{
+//   //   res.send(err);
+//   // }); // { $push: {songs: item._id} });
 // });
 // const artist1 = new db.Album({
 //   name: 'Squarepants',
