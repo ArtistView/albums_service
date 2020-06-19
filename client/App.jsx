@@ -56,11 +56,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <AlbumList type="album" albums={this.state.albums} />
-        <AlbumList type="single or EP" albums={this.state.albums} />
+        <AlbumList type="Albums" albums={this.state.albums} />
+        <AlbumList type="Singles and EPs" albums={this.state.albums} />
         {/* fix the single or EP type thing to take either of the types */}
-        <AlbumList type="collection" albums={this.state.albums} />
-        <AlbumList type="appears on" albums={this.state.features} />
+        <AlbumList type="Collections" albums={this.state.albums} />
+        <AlbumList type="Appears On" albums={this.state.features} />
       </div>
     );
   }
