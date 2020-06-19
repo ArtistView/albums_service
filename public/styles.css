@@ -17,16 +17,18 @@ body {
   margin-left: 10px;
   margin-right: 10px;
   width: 180;
-  /* text-align: center; */
 }
-/* #main-albums-wrapper{
-  background-color: black;
-} */
+.album:hover #album-cover{
+  opacity: .5;
+}
 #album-cover {
   width:180px;
   height:180px;
   object-fit: cover;
 }
+/* #gr-play{
+  height: 20px;
+} */
 #album-title{
   text-align: center;
   font-size: small;
@@ -34,6 +36,7 @@ body {
 }
 #album-title:hover {
   text-decoration: underline;
+  /* right now anywhere on the line of the text makes it underline, but we want just the actual text not the whole div*/
 }
 .album-list-title{
   font-size: x-large;
