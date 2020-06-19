@@ -30,7 +30,21 @@ app.get('/albums/:artistId', (req, res) => {
       res.send(albums);
     })
     .catch((err) => {
-      res.error(err);
+      res.send(err);
+    });
+});
+app.get('/albums/features/:artistId', (req, res) => {
+  console.log('running request', req.params);
+  // try to refactor this to get into router later but for now it works
+  // also add tests
+  db.Album.find({ featuredArtists: req.params.artistId })
+    .then((albums) => {
+      // console.log('in the then', albums);
+      res.send(albums);
+    })
+    .catch((err) => {
+      // console.log(err);
+      res.send(err);
     });
 });
 // code below was used for populating database, prob not needed but I'll leave it for now

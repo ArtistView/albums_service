@@ -11,11 +11,12 @@ class App extends React.Component {
       features: [], // set to an empty array initially, represents the ablums that the artist appears on
     };
     this.getAlbums = this.getAlbums.bind(this);
+    this.getFeatures = this.getFeatures.bind(this);
   }
 
   componentDidMount() {
     this.getAlbums(this.state.artist);
-    console.log
+    this.getFeatures(this.state.artist);
   }
 
   getAlbums(artist) {
@@ -27,6 +28,23 @@ class App extends React.Component {
       .then((data) => {
         this.setState({
           albums: data,
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    // need to write tests for this
+  }
+
+  getFeatures(artist) {
+    const url = `http://localhost:3273/albums/featured/:${artist}`;
+    // calling a get request to pull down all the albums in the db that matches the artist
+    // this only pulls down the albums that the artist appears on
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          features: data,
         });
       })
       .catch((err) => {
