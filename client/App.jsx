@@ -17,32 +17,40 @@ class App extends React.Component {
   componentDidMount() {
     this.getAlbums(this.state.artist);
     this.getFeatures(this.state.artist);
+    console.log(this.state);
+    // the state is not setting correctly here but it is logging correctly within the getAlbums method, so idk
+    // props are not being passed as a result of this
+    // i think bc its async it's getting to the render method before the state changes
   }
 
   getAlbums(artist) {
-    const url = `http://localhost:3273/albums/:${artist}`;
+    const url = `http://localhost:3273/albums/${artist}`;
     // calling a get request to pull down all the albums in the db that matches the artist
     // this only pulls down the albums that the artist is the primary artist for, not appears on
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        console.log('albums data', data);
         this.setState({
           albums: data,
         });
+        // console.log('albums state', this.state.albums);
       })
       .catch((err) => {
         console.error(err);
       });
     // need to write tests for this
+    console.log('albums state', this.state.albums);
   }
 
   getFeatures(artist) {
-    const url = `http://localhost:3273/albums/featured/:${artist}`;
+    const url = `http://localhost:3273/albums/features/${artist}`;
     // calling a get request to pull down all the albums in the db that matches the artist
     // this only pulls down the albums that the artist appears on
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        console.log('features data', data);
         this.setState({
           features: data,
         });

@@ -13,6 +13,7 @@ class AlbumList extends React.Component {
   }
 
   componentDidMount() {
+    // console.log('prop albums', this.props);
     let albumsOfType = [];
     if (this.state.type === 'Appears On') {
       albumsOfType = this.props.albums;
@@ -35,13 +36,13 @@ class AlbumList extends React.Component {
         }
       }
     }
-    this.setSate({
+    this.setState({
       albums: albumsOfType,
     });
+    // console.log('albums', this.state.albums);
     // should set the state to hold the albums of the artist of the correct type
   }
-  // console.log('hello world');
-  // return <Album />;
+  // need to write tests as well as write clickHandlers to be used as props for the album component
 
   render() {
     return(
