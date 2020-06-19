@@ -18,7 +18,7 @@ class App extends React.Component {
   componentDidMount() {
     this.getAlbums(this.state.artist);
     this.getFeatures(this.state.artist);
-    console.log(this.state);
+    // console.log(this.state);
     // the state is not setting correctly here but it is logging correctly within the getAlbums method, so idk
     // props are not being passed as a result of this
     // i think bc its async it's getting to the render method before the state changes
@@ -31,17 +31,17 @@ class App extends React.Component {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        console.log('albums data', data);
+        // console.log('albums data', data);
         this.setState({
           albums: data,
         });
         // console.log('albums state', this.state.albums);
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
       });
     // need to write tests for this
-    console.log('albums state', this.state.albums);
+    // console.log('albums state', this.state.albums);
   }
 
   getFeatures(artist) {
@@ -51,7 +51,7 @@ class App extends React.Component {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        console.log('features data', data);
+        // console.log('features data', data);
         this.setState({
           features: data,
           isLoaded: true,
