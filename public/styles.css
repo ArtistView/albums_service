@@ -26,6 +26,10 @@ body {
   height:180px;
   object-fit: cover;
 }
+#play-button{
+  width:180px;
+  height:180px;
+}
 /* #gr-play{
   height: 20px;
 } */
