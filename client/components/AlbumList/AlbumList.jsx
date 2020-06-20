@@ -9,6 +9,8 @@ class AlbumList extends React.Component {
       type: this.props.type,
       albums: [],
       showMore: false,
+      showMoreText: '',
+      showAtAll: false,
     };
   }
 
@@ -36,24 +38,35 @@ class AlbumList extends React.Component {
         }
       }
     }
-    this.setState({
-      albums: albumsOfType,
-    });
+    if (albumsOfType.length > 0) {
+      this.setState({
+        albums: albumsOfType,
+        showAtAll: true,
+      });
+    }
+    if (albumsOfType.length > 12) {
+      this.setState({
+        showMoreText: 'show more',
+      });
+    }
     // console.log('albums', this.state.albums);
     // should set the state to hold the albums of the artist of the correct type
   }
   // need to write tests as well as write clickHandlers to be used as props for the album component
 
   render() {
-    return(
-      <div className="albumList">
-        <div className="album-list-title">{this.state.type}</div>
-        <div className="album-list-list">
-          {this.state.albums.map((album) => <Album album={album} key={album._id} />)}
+    if (this.state.showAtAll) {
+      return(
+        <div className="album-list">
+          <div className="album-list-title">{this.state.type}</div>
+          <div className="album-list-list">
+            {this.state.albums.map((album) => <Album album={album} key={album._id} />)}
+          </div>
+        <div className="album-list-show-more-less">{this.state.showMoreText}</div>
         </div>
-        <div className="album-list-show-more-less">show more</div>
-      </div>
-    );
+      );
+    }
+    return <div id="no-albums-of-this-type" />;
   };
 };
 

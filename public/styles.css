@@ -1,6 +1,54 @@
+/* @import url('http://www.fontbros.com/families/proxima-nova?src=GoogleFonts'); */
+body {
+  background-color: black;
+}
 #app{
   background-color: black;
+  color: white;
+  font-family: proxima-nova, sans-serif;
+  /* this font is close but not quite, a little too thick and less round */
+  /* font-family: 'El Messiri', sans-serif; */
+  font-style: normal;
+  font-weight: bold;
 }
 .album{
   background-color: black;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 180;
+}
+.album:hover #album-cover{
+  opacity: .5;
+}
+#album-cover {
+  width:180px;
+  height:180px;
+  object-fit: cover;
+}
+#play-button{
+  width:180px;
+  height:180px;
+}
+/* #gr-play{
+  height: 20px;
+} */
+#album-title{
+  text-align: center;
+  font-size: small;
+  margin-top: 10px;
+}
+#album-title:hover {
+  text-decoration: underline;
+  /* right now anywhere on the line of the text makes it underline, but we want just the actual text not the whole div*/
+}
+.album-list-title{
+  font-size: x-large;
+  margin-top: 65px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.album-list-show-more-less{
+ clear: both;
 }
