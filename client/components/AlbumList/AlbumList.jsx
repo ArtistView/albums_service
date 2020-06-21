@@ -16,6 +16,7 @@ class AlbumList extends React.Component {
 
   componentDidMount() {
     // console.log('prop albums', this.props);
+    // console.log(this.props.albums);
     let albumsOfType = [];
     if (this.state.type === 'Appears On') {
       albumsOfType = this.props.albums;
