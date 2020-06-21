@@ -26,10 +26,16 @@ body {
   height:180px;
   object-fit: cover;
 }
+#album-cover-wrapper{
+  position: relative;
+  width:180px;
+  height:180px;
+}
 #play-button{
-  /* position: absolute;
+  position: absolute;
+  left: 20%;
   top: 20%;
-  left: 20%; */
+  /* change percentages and size as needed */
   width:90px;
   height:90px;
 }

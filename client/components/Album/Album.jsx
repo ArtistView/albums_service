@@ -36,8 +36,10 @@ class Album extends React.Component {
       <div className="album" id={this.props.key}>
         {/* <script src="./Album.css" /> */}
         {/* <h3 id="gr-play"> */}
-        <img id="album-cover" src={this.props.album.imageUrl} alt="" />
-        <img id="play-button" src={this.state.buttonUrls[this.state.buttonIndex]} alt="" onClick={this.play} />
+        <div id="album-cover-wrapper">
+          <img id="album-cover" src={this.props.album.imageUrl} alt="" />
+          <img id="play-button" src={this.state.buttonUrls[this.state.buttonIndex]} alt="" onClick={this.play} />
+        </div>
         {/* I made a play and pause button on my computer saved in my desktop, need to figure out how to have them render on top of the album cover and switch when one is clicked (prob with state) */}
         {/* need a hovering play button that goes over the image and appears on hover onClick for the play button should call ()=>{props.onClick(props.album.firstSong)} */ }
         <div id="album-title">
