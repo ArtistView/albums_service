@@ -3,16 +3,16 @@ import ReactDom from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
 import AlbumList from '../../client/components/AlbumList/AlbumList.jsx';
 
-let albums = [
+const albums = [
   {
-    artistId: "5eebe7b2c451ef0e3f4c0533",
-    featuredArtists: ["5eebdbf1bf2d490c13ff868d"],
-    imageUrl: "https://tinyurl.com/yc9dd4jq",
-    songs: ["5eebfe07a386ca12ede16e2f", "5eebfe07a386ca12ede16e93", "5eebfe07a386ca12ede16e2f", "5eebfe07a386ca12ede16e93", "5eebfe07a386ca12ede16e2f", "5eebfe07a386ca12ede16e93"],
-    title: "aliquam",
-    type: "album",
+    artistId: '5eebe7b2c451ef0e3f4c0533',
+    featuredArtists: ['5eebdbf1bf2d490c13ff868d'],
+    imageUrl: 'https://tinyurl.com/yc9dd4jq',
+    songs: ['5eebfe07a386ca12ede16e2f', '5eebfe07a386ca12ede16e93', '5eebfe07a386ca12ede16e2f', '5eebfe07a386ca12ede16e93', '5eebfe07a386ca12ede16e2f', '5eebfe07a386ca12ede16e93'],
+    title: 'aliquam',
+    type: 'album',
     __v: 0,
-    _id: "5eebecb1969c0a0fa4e0ce45",
+    _id: '5eebecb1969c0a0fa4e0ce45',
   },
 ];
 // const getAlbums = () => {
@@ -39,4 +39,9 @@ describe('AlbumList', () => {
     // console.log('album is', wrapper);
     expect(wrapper.exists()).toBe(true);
   });
+  // implement snapshot testing once I know more what it is going to look like
+  // once I implement show more/less feature use a test structure like the one below to check it
+  // expect(wrapper.text()).toEqual('Show More');
+  // wrapper.find('showMore').simulate('change');
+  // expect(wrapper.text()).toEqual('Show Less');
 });
