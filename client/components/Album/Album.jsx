@@ -9,8 +9,10 @@ class Album extends React.Component {
       buttonUrls: ['https://tinyurl.com/ya65klnb','https://tinyurl.com/y7jjtjob'],
       // buttonUrls: ['https://fakespotify.s3-us-west-1.amazonaws.com/play-button-transparent.png','https://fakespotify.s3-us-west-1.amazonaws.com/pause-button-transparent.png'],
       buttonIndex: 0,
+      showButton: false,
     };
     this.play = this.play.bind(this);
+    // this.show = this.show.bind(this);
   }
   // props should be an album object with properties for the title, cover image, first song and key and onclick and onhover handlers that play the song
   // adding this comment to test circle
@@ -21,6 +23,7 @@ class Album extends React.Component {
       this.setState({
         playing: true,
         buttonIndex: 1,
+        showButton: true,
       });
     } else {
       // stop playing the mp3 file currently playing
@@ -30,6 +33,12 @@ class Album extends React.Component {
       });
     }
   }
+
+  // show(event) {
+  //   if (playing === true){
+  //     return true;
+  //   }
+  // }
 
   render() {
     return (
