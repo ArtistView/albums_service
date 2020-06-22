@@ -36,9 +36,14 @@ body {
   position: absolute;
   left: 30%;
   top: 30%;
-  /* change percentages and size as needed */
+  /* vertical-align: middle; */
+  /* change percentages and size as needed and make sure it's centered*/
   width:70px;
   height:70px;
+}
+#play-button:hover{
+  width:73px;
+  height:73px;
 }
 .album:hover #play-button{
   display: block;

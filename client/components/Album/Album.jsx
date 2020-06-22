@@ -6,7 +6,8 @@ class Album extends React.Component {
     super(props);
     this.state = {
       playing: false,
-      buttonUrls: ['https://fakespotify.s3-us-west-1.amazonaws.com/play-button-transparent.png','https://fakespotify.s3-us-west-1.amazonaws.com/pause-button-transparent.png'],
+      buttonUrls: ['https://fakespotify.s3-us-west-1.amazonaws.com/play-button-transparent.png', 'https://fakespotify.s3-us-west-1.amazonaws.com/pause-button-transparent.png'],
+      // these pics aren't perfect so maybe find better ones later
       buttonIndex: 0,
       // showButton: false,
     };
@@ -17,23 +18,18 @@ class Album extends React.Component {
   // adding this comment to test circle
 
   play(event) {
-    // const playButton = document.getElementById('play-button');
     // console.dir(event.target);
     if (this.state.playing === false) {
       // get the first song from the album and play the mp3
-      // playButton.style.display = 'block';
-      // currently messing with all the albums not just the one I am on
-      // trying to set the display on click so that when I click to play it always displays the pause button but when I pause it it only displays on hover
-      event.target.style.display = 'block';
+      event.target.style.display = 'block'; // makes the pause button persist even after hover
       this.setState({
         playing: true,
         buttonIndex: 1,
         // showButton: true,
       });
     } else {
-      // playButton.style.display = 'none';
       // stop playing the mp3 file currently playing
-      event.target.style.display = '';
+      event.target.style.display = ''; // makes the play button return to normal hover behavior as we set in css
       this.setState({
         playing: false,
         buttonIndex: 0,
