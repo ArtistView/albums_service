@@ -18,7 +18,6 @@ class Album extends React.Component {
     this.getSong = this.getSong.bind(this);
   }
   // props should be an album object with properties for the title, cover image, first song and key and onclick and onhover handlers that play the song
-  // adding this comment to test circle
 
   componentDidMount() {
     this.getSong(this.state.nextSong);
@@ -59,6 +58,7 @@ class Album extends React.Component {
     if (this.state.playing === false) {
       // get the first song from the album and play the mp3
       event.target.style.display = 'block'; // makes the pause button persist even after hover
+      // turn this off if another album is clicked
       // the album cover should stay darker when the pause is showing too
       this.setState({
         playing: true,
