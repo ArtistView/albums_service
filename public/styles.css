@@ -34,11 +34,11 @@ body {
 #play-button{
   display: none;
   position: absolute;
-  left: 20%;
-  top: 20%;
+  left: 30%;
+  top: 30%;
   /* change percentages and size as needed */
-  width:90px;
-  height:90px;
+  width:70px;
+  height:70px;
 }
 .album:hover #play-button{
   display: block;

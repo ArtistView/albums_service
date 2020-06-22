@@ -6,9 +6,7 @@ class Album extends React.Component {
     super(props);
     this.state = {
       playing: false,
-      buttonUrls: ['https://tinyurl.com/ycfrzsl7', 'https://tinyurl.com/ycy9f3vp'],
-      // these are mock pictures, get better ones when I can
-      // buttonUrls: ['https://fakespotify.s3-us-west-1.amazonaws.com/play-button-transparent.png','https://fakespotify.s3-us-west-1.amazonaws.com/pause-button-transparent.png'],
+      buttonUrls: ['https://fakespotify.s3-us-west-1.amazonaws.com/play-button-transparent.png','https://fakespotify.s3-us-west-1.amazonaws.com/pause-button-transparent.png'],
       buttonIndex: 0,
       // showButton: false,
     };
