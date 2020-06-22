@@ -34,9 +34,15 @@ body {
 #play-button{
   display: none;
   position: absolute;
-  left: 30%;
+  /* left: 30%;
   top: 30%;
-  /* vertical-align: middle; */
+  vertical-align: middle; */
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto auto;
+
   /* change percentages and size as needed and make sure it's centered*/
   width:70px;
   height:70px;

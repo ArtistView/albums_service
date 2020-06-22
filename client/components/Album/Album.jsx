@@ -9,19 +9,57 @@ class Album extends React.Component {
       buttonUrls: ['https://fakespotify.s3-us-west-1.amazonaws.com/play-button-transparent.png', 'https://fakespotify.s3-us-west-1.amazonaws.com/pause-button-transparent.png'],
       // these pics aren't perfect so maybe find better ones later
       buttonIndex: 0,
+      currentlyPlayingSong: {},
+      nextSong: this.props.album.songs[0],
+      nextSongIndex: 0,
       // showButton: false,
     };
     this.play = this.play.bind(this);
-    // this.show = this.show.bind(this);
+    this.getSong = this.getSong.bind(this);
   }
   // props should be an album object with properties for the title, cover image, first song and key and onclick and onhover handlers that play the song
   // adding this comment to test circle
 
+  componentDidMount() {
+    this.getSong(this.state.nextSong);
+    // this.setState({
+    //   nextSong: this.props.album.songs[this.state.nextSongIndex + 1],
+    //   nextSongIndex: this.state.nextSongIndex + 1,
+    // });
+  }
+
+  getSong(songId) {
+    const url = `http://localhost:3273/songs/${songId}`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log('albums data', data);
+        if (this.state.nextSongIndex >= this.props.albums.songs.length) {
+          this.setState({
+            currentlyPlayingSong: data,
+            nextSong: '',
+          });
+        } else {
+          this.setState({
+            currentlyPlayingSong: data,
+            nextSong: this.props.album.songs[this.state.nextSongIndex + 1],
+            nextSongIndex: this.state.nextSongIndex + 1,
+          });
+        }
+        // console.log('albums state', this.state.albums);
+      })
+      .catch((err) => {
+        // console.error(err);
+      });
+  }
+
   play(event) {
     // console.dir(event.target);
+    console.log(this.state);
     if (this.state.playing === false) {
       // get the first song from the album and play the mp3
       event.target.style.display = 'block'; // makes the pause button persist even after hover
+      // the album cover should stay darker when the pause is showing too
       this.setState({
         playing: true,
         buttonIndex: 1,

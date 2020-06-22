@@ -38,7 +38,7 @@ class App extends React.Component {
         // console.log('albums state', this.state.albums);
       })
       .catch((err) => {
-        // console.error(err);
+        console.error(err);
       });
     // need to write tests for this
     // console.log('albums state', this.state.albums);
