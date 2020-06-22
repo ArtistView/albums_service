@@ -43,9 +43,6 @@ body {
 .album:hover #play-button{
   display: block;
 }
-/* #gr-play{
-  height: 20px;
-} */
 #album-title{
   text-align: center;
   font-size: small;
