@@ -58,6 +58,17 @@ app.get('/albums/byId/:albumId', (req, res) => {
       res.send(err);
     });
 });
+app.get('/songs/:songId', (req, res) => {
+  db.Song.findOne({ _id: req.params.songId })
+    .then((albums) => {
+      // console.log('in the then', albums);
+      res.send(albums);
+    })
+    .catch((err) => {
+      // console.log(err);
+      res.send(err);
+    });
+});
 // code below was used for populating database, prob not needed but I'll leave it for now
 // console.log(artists[0], artists[1]);
 // for (var artist of artists) {

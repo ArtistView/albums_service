@@ -10,9 +10,11 @@ class App extends React.Component {
       albums: [], // set this initally to an empty array, represents the albums written by the artist
       features: [], // set to an empty array initially, represents the ablums that the artist appears on
       isLoaded: false,
+      playing: '', // need to know which album is playing so all other albums can be set to stop playing
     };
     this.getAlbums = this.getAlbums.bind(this);
     this.getFeatures = this.getFeatures.bind(this);
+    this.playing = this.playing.bind(this);
   }
 
   componentDidMount() {
@@ -38,7 +40,7 @@ class App extends React.Component {
         // console.log('albums state', this.state.albums);
       })
       .catch((err) => {
-        // console.error(err);
+        console.error(err);
       });
     // need to write tests for this
     // console.log('albums state', this.state.albums);
@@ -63,15 +65,23 @@ class App extends React.Component {
     // need to write tests for this
   }
 
+  playing(album) {
+    // this method will be passed as a prop to the lower components so they can change this global state
+    this.setState({
+      playing: album,
+    });
+    // console.log(this.state.playing, 'is playing');
+  }
+
   render() {
     if (this.state.isLoaded) {
       return (
         <div id="main-albums-wrapper">
-          <AlbumList type="Albums" albums={this.state.albums} />
-          <AlbumList type="Singles and EPs" albums={this.state.albums} />
+          <AlbumList type="Albums" albums={this.state.albums} playing={this.playing} currPlaying={this.state.playing} />
+          <AlbumList type="Singles and EPs" albums={this.state.albums} playing={this.playing} currPlaying={this.state.playing} />
           {/* fix the single or EP type thing to take either of the types */}
-          <AlbumList type="Compilations" albums={this.state.albums} />
-          <AlbumList type="Appears On" albums={this.state.features} />
+          <AlbumList type="Compilations" albums={this.state.albums} playing={this.playing} currPlaying={this.state.playing} />
+          <AlbumList type="Appears On" albums={this.state.features} playing={this.playing} currPlaying={this.state.playing} />
         </div>
       );
     }
