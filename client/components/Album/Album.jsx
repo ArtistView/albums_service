@@ -7,7 +7,7 @@ class Album extends React.Component {
     this.myRef = React.createRef();
     this.state = {
       playing: false,
-      buttonUrls: ['https://fakespotify.s3-us-west-1.amazonaws.com/play-button-transparent.png', 'https://fakespotify.s3-us-west-1.amazonaws.com/pause-button-transparent.png'],
+      buttonUrls: ['https://fakespotify.s3-us-west-1.amazonaws.com/play-button-2.png', 'https://fakespotify.s3-us-west-1.amazonaws.com/pause-button-try-3.png'],
       // these pics aren't perfect so maybe find better ones later
       buttonIndex: 0,
       currentlyPlayingSong: {},
@@ -23,11 +23,6 @@ class Album extends React.Component {
 
   componentDidMount() {
     this.getSong(this.state.nextSong);
-    // console.log(this.props);
-    // this.setState({
-    //   nextSong: this.props.album.songs[this.state.nextSongIndex + 1],
-    //   nextSongIndex: this.state.nextSongIndex + 1,
-    // });
   }
 
   componentDidUpdate() {
