@@ -9,7 +9,7 @@ class App extends React.Component {
       artist: '5eebdbf1bf2d490c13ff868d', // this is hardcoded but I should pull this state down from the url
       albums: [], // set this initally to an empty array, represents the albums written by the artist
       features: [], // set to an empty array initially, represents the ablums that the artist appears on
-      isLoaded: false,
+      isLoaded: false, // used for conditional rendering to make sure the fetch has completed before rendering
       playing: '', // need to know which album is playing so all other albums can be set to stop playing
     };
     this.getAlbums = this.getAlbums.bind(this);
@@ -20,10 +20,7 @@ class App extends React.Component {
   componentDidMount() {
     this.getAlbums(this.state.artist);
     this.getFeatures(this.state.artist);
-    // console.log(this.state);
-    // the state is not setting correctly here but it is logging correctly within the getAlbums method, so idk
-    // props are not being passed as a result of this
-    // i think bc its async it's getting to the render method before the state changes
+    // upon loading the app, we grab the albums and features of this artist and store them in the state
   }
 
   getAlbums(artist) {
@@ -33,27 +30,23 @@ class App extends React.Component {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        // console.log('albums data', data);
         this.setState({
           albums: data,
         });
-        // console.log('albums state', this.state.albums);
       })
       .catch((err) => {
         console.error(err);
       });
     // need to write tests for this
-    // console.log('albums state', this.state.albums);
   }
 
   getFeatures(artist) {
     const url = `http://localhost:3273/albums/features/${artist}`;
-    // calling a get request to pull down all the albums in the db that matches the artist
+    // calling a get request to pull down all the albums in the db whose featuredArtists array contains the artist
     // this only pulls down the albums that the artist appears on
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        // console.log('features data', data);
         this.setState({
           features: data,
           isLoaded: true,
@@ -67,10 +60,10 @@ class App extends React.Component {
 
   playing(album) {
     // this method will be passed as a prop to the lower components so they can change this global state
+    // need to track which album is playing and be able to change it within the album component so no two albums can play at the same time
     this.setState({
       playing: album,
     });
-    // console.log(this.state.playing, 'is playing');
   }
 
   render() {
@@ -79,7 +72,6 @@ class App extends React.Component {
         <div id="main-albums-wrapper">
           <AlbumList type="Albums" albums={this.state.albums} playing={this.playing} currPlaying={this.state.playing} />
           <AlbumList type="Singles and EPs" albums={this.state.albums} playing={this.playing} currPlaying={this.state.playing} />
-          {/* fix the single or EP type thing to take either of the types */}
           <AlbumList type="Compilations" albums={this.state.albums} playing={this.playing} currPlaying={this.state.playing} />
           <AlbumList type="Appears On" albums={this.state.features} playing={this.playing} currPlaying={this.state.playing} />
         </div>
