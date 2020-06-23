@@ -72,22 +72,23 @@ body {
   margin-right: 10px;
 }
 .album-list-show-more-less{
- clear: both;
- text-align: center;
- margin-top: 20px;
- font-size: small;
- font-weight: normal;
- position: relative;
- /* make it look more like the spotify one  */
+  letter-spacing: 2px;
+  clear: both;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 11px;
+  font-weight: normal;
+  position: relative;
+  /* make it look more like the spotify one  */
 }
 #album-up-arrow{
-  font-size: 20px;
+  font-size: 18px;
   margin-left: 5px;
   position: absolute;
   bottom: -2;
 }
 #album-down-arrow{
-  font-size: 20px;
+  font-size: 18px;
   margin-left: 5px;
   position: absolute;
   bottom: -2;
