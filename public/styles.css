@@ -73,3 +73,6 @@ body {
 .album-list-show-more-less{
  clear: both;
 }
+.album-list{
+  width: 1200;
+}
