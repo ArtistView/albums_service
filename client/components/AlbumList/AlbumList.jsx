@@ -1,5 +1,6 @@
 import React from 'react';
 import Album from '../Album/Album.jsx';
+import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
 
 class AlbumList extends React.Component {
 
@@ -10,6 +11,7 @@ class AlbumList extends React.Component {
       albums: [],
       showMore: false,
       showMoreText: '',
+      showMoreArrow: '',
       showAtAll: false,
       currShowing: [],
     };
@@ -52,6 +54,7 @@ class AlbumList extends React.Component {
       this.setState({
         showMoreText: 'SHOW MORE',
         currShowing: albumsOfType.slice(0,12),
+        showMoreArrow: <AiOutlineDown id="album-down-arrow" />,
       });
     }
     // console.log('albums', this.state.albums);
@@ -68,12 +71,14 @@ class AlbumList extends React.Component {
         showMore: true,
         showMoreText: 'SHOW LESS',
         currShowing: this.state.albums,
+        showMoreArrow: <AiOutlineUp id="album-up-arrow" />,
       });
     } else {
       this.setState({
         showMore: false,
         showMoreText: 'SHOW MORE',
         currShowing: this.state.albums.slice(0, 12),
+        showMoreArrow: <AiOutlineDown id="album-down-arrow" />,
       });
     }
   }
@@ -88,6 +93,8 @@ class AlbumList extends React.Component {
           </div>
           <div className="album-list-show-more-less" onClick={this.showMoreLess}>
             {this.state.showMoreText}
+            {this.state.showMoreArrow}
+            {/* <AiOutlineDown /> */}
           </div>
         </div>
       );
