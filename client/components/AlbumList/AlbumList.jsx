@@ -11,7 +11,9 @@ class AlbumList extends React.Component {
       showMore: false,
       showMoreText: '',
       showAtAll: false,
+      currShowing: [],
     };
+    this.showMoreLess = this.showMoreLess.bind(this);
   }
 
   componentDidMount() {
@@ -43,11 +45,13 @@ class AlbumList extends React.Component {
       this.setState({
         albums: albumsOfType,
         showAtAll: true,
+        currShowing: albumsOfType,
       });
     }
     if (albumsOfType.length > 12) {
       this.setState({
-        showMoreText: 'show more',
+        showMoreText: 'SHOW MORE',
+        currShowing: albumsOfType.slice(0,12),
       });
     }
     // console.log('albums', this.state.albums);
@@ -55,15 +59,36 @@ class AlbumList extends React.Component {
   }
   // need to write tests as well as write clickHandlers to be used as props for the album component
 
+  showMoreLess(event) {
+    if (this.state.showMore === false) {
+      // if it's currently showing twelve make it show all of the albums and change the text
+      // event.target.text = 'SHOW LESS';
+      // make sure to add the up and down pointing arrow icons in the text
+      this.setState({
+        showMore: true,
+        showMoreText: 'SHOW LESS',
+        currShowing: this.state.albums,
+      });
+    } else {
+      this.setState({
+        showMore: false,
+        showMoreText: 'SHOW MORE',
+        currShowing: this.state.albums.slice(0, 12),
+      });
+    }
+  }
+
   render() {
     if (this.state.showAtAll) {
       return(
         <div className="album-list">
           <div className="album-list-title">{this.state.type}</div>
           <div className="album-list-list">
-            {this.state.albums.map((album) => <Album album={album} key={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} />)}
+            {this.state.currShowing.map((album) => <Album album={album} key={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} />)}
           </div>
-        <div className="album-list-show-more-less">{this.state.showMoreText}</div>
+          <div className="album-list-show-more-less" onClick={this.showMoreLess}>
+            {this.state.showMoreText}
+          </div>
         </div>
       );
     }

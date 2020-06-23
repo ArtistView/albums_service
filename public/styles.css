@@ -16,6 +16,7 @@ body {
   float: left;
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 50px;
   width: 180;
 }
 .album:hover #album-cover{
@@ -72,6 +73,11 @@ body {
 }
 .album-list-show-more-less{
  clear: both;
+ text-align: center;
+ margin-top: 20px;
+ font-size: small;
+ font-weight: normal;
+ /* make it look more like the spotify one  */
 }
 .album-list{
   width: 1200;

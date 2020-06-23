@@ -70,8 +70,9 @@ class App extends React.Component {
     this.setState({
       playing: album,
     });
-    console.log(this.state.playing, 'is playing');
+    // console.log(this.state.playing, 'is playing');
   }
+
   render() {
     if (this.state.isLoaded) {
       return (
