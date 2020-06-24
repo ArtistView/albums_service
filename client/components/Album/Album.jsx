@@ -14,6 +14,7 @@ class Album extends React.Component {
       currentlyPlayingSong: {}, // stores the song object that is currently playing
       nextSong: this.props.album.songs[0], // stores the id of the next song to be played, initialized to the first song in the album since that will play first upon click of the play button
       nextSongIndex: 0, // stores the index of the next song to be played within the songs array of the album
+      audio: '', // stores the mp3 file for the song that is playing
     };
     this.play = this.play.bind(this);
     this.getSong = this.getSong.bind(this);
@@ -21,6 +22,7 @@ class Album extends React.Component {
 
   componentDidMount() {
     this.getSong(this.state.nextSong);
+    // console.log(this.state);
     // upon loading the component it sets the currently playing song in state to be the first song in the album
     // honestly idk if this is what we want to do though, might just want to wait til play is pressed to get the songs from the db
   }
@@ -30,15 +32,15 @@ class Album extends React.Component {
     // makes sure that when another album is clicked, the current album stops playing and resets its behavior to what it is initially
     if(this.props.currPlaying !== this.props.album._id && this.props.currPlaying !== '' && this.state.playing === true) {
       this.refs.playbutton.style.display = ''; // makes the play button return to normal hover behavior as we set in css
+      this.refs.albumcover.style.opacity = '';
       // reset the song state to the first song in the album
+      this.state.audio.pause(); // pauses the audio upon another album's click
       this.setState({
         playing: false,
         buttonIndex: 0,
-        currentlyPlayingSong: {},
-        nextSong: this.props.album.songs[0],
-        nextSongIndex: 0,
       });
-      this.getSong(this.state.nextSong); // should reset the song to the first song in the album
+      this.getSong(this.props.album.songs[0]); // should reset the song to the first song in the album
+      this.state.audio.currentTime = 0; // resets the song to the beginning
       // need to test this stuff
       // implement pause functionality within here too
       // return;
@@ -52,7 +54,8 @@ class Album extends React.Component {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        if (this.state.nextSongIndex >= this.props.albums.songs.length) {
+        console.log('song is', data);
+        if (this.state.nextSongIndex >= this.props.album.songs.length) {
           // if this is the last song in the album, set the next song to be nothing
           this.setState({
             currentlyPlayingSong: data,
@@ -64,6 +67,7 @@ class Album extends React.Component {
             currentlyPlayingSong: data,
             nextSong: this.props.album.songs[this.state.nextSongIndex + 1],
             nextSongIndex: this.state.nextSongIndex + 1,
+            audio: new Audio(data.mp3),
           });
         }
       })
@@ -81,6 +85,10 @@ class Album extends React.Component {
       this.props.startPlaying(this.props.album._id); // changes the global state to be playing this album
       // this will trigger any other album that is playing to stop through the componentDidUpdate method
       this.refs.albumcover.style.opacity = 0.5; // the album cover will stay darker when the pause is showing as if it was being hovered over
+      // console.log('this shopuld play', this.state.currentlyPlayingSong);
+      // let audio = new Audio(this.state.currentlyPlayingSong.mp3);
+      this.state.audio.play(); // plays the audio from the mp3 file for the current song
+      // at the end of the song we need to call getSong again for the next song's mp3 to start
       this.setState({
         playing: true,
         buttonIndex: 1,
@@ -90,6 +98,7 @@ class Album extends React.Component {
       event.target.style.display = '';
       this.refs.albumcover.style.opacity = '';
       // the above two lines make the play button return to normal hover behavior as we set in css
+      this.state.audio.pause();
       this.setState({
         playing: false,
         buttonIndex: 0,
