@@ -76,7 +76,7 @@ class Album extends React.Component {
       // this will trigger any other album that is playing to stop through the componentDidUpdate method
       this.refs.albumcover.style.opacity = 0.5; // the album cover will stay darker when the pause is showing as if it was being hovered over
       this.state.audio.play(); // plays the audio from the mp3 file for the current song
-      // at the end of the song we need to call getSong again for the next song's mp3 to start
+      // at the end of the song we need to set the currSongIndex to increment by 1 and set the audio file to the next one in the list
       // use ended event and then call getSong for the next song and play it.
       this.setState({
         playing: true,
