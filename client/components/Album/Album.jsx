@@ -17,6 +17,7 @@ class Album extends React.Component {
     };
     this.play = this.play.bind(this);
     this.getSongs = this.getSongs.bind(this);
+    this.playNext = this.playNext.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +41,9 @@ class Album extends React.Component {
         audio: new Audio(this.state.audioList[0]),
       });
       this.state.audio.currentTime = 0; // resets the song to the beginning
+      this.state.audio.addEventListener('ended', () => {
+        this.playNext();
+      });
       // need to test this stuff
     }
   }
@@ -58,6 +62,9 @@ class Album extends React.Component {
             audio: new Audio(this.state.audioList[this.state.currSongIndex]),
             audioList: this.state.audioList.concat(data.mp3),
           });
+          this.state.audio.addEventListener('ended', () => {
+            this.playNext(); // add event listener to the audio that plays the next song once it ends
+          });
           // }
         })
         .catch((err) => {
@@ -69,7 +76,6 @@ class Album extends React.Component {
   play(event) {
     // on click of the play button, we toggle the play and pause images and implement functionality and styling
     // need to actually implement the play/pause music functionality by grabbing the mp3 from currently playing and playing it
-    console.dir(this.state);
     if (this.state.playing === false) {
       event.target.style.display = 'block'; // makes the pause button persist even after hover
       this.props.startPlaying(this.props.album._id); // changes the global state to be playing this album
@@ -94,6 +100,34 @@ class Album extends React.Component {
     }
   }
 
+  playNext() {
+    // this method will go to the next song in the album list and play it
+    console.log('invoking play next');
+    if (this.state.currSongIndex > this.state.audioList.length) {
+      console.log('end of the album');
+      // if there are no more songs left in the album, reset the current song to the beginning of the album but don't play it
+      this.setState({
+        playing: false,
+        buttonIndex: 0,
+        audio: new Audio(this.state.audioList[0]),
+      });
+      this.state.audio.addEventListener('ended', () => {
+        this.playNext();
+      });
+      this.refs.playbutton.style.display = '';
+      this.refs.albumcover.style.opacity = '';
+      // makes the play button return to normal hover behavior as we set in css
+    } else {
+      // if there are more songs in the list increment the current song by one and play the song
+      this.setState({
+        audio: new Audio(this.state.audioList[this.state.currSongIndex + 1]),
+        currSongIndex: this.state.currSongIndex + 1,
+      });
+      this.state.audio.play();
+      console.log('play next song', this.state);
+    }
+  }
+
   render() {
     // renders an album cover with a play button on top of it that has clickable functionality
     // also renders an album title underneath that underlines on hover but doesn't have clickable functionality as that is outside the scope of the artist page, theoretically in actual spotify a click will take you to the album's page though
@@ -106,6 +140,7 @@ class Album extends React.Component {
         <div id="album-title">
           {this.props.album.title}
         </div>
+        {/* <audio ref="audioFile" src={this.state.audio} onEnded={this.playNext} /> */}
       </div>
     );
   }
