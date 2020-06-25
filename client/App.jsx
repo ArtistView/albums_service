@@ -1,6 +1,15 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import styled, { css } from 'styled-components';
 import AlbumList from './components/AlbumList/AlbumList.jsx';
+
+const MainAlbumsWrapper = styled.div`
+  color: white;
+  background-color: #151515;
+  font-family: proxima-nova, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -69,12 +78,12 @@ class App extends React.Component {
   render() {
     if (this.state.isLoaded) {
       return (
-        <div id="main-albums-wrapper">
+        <MainAlbumsWrapper id="main-albums-wrapper">
           <AlbumList type="Albums" albums={this.state.albums} playing={this.playing} currPlaying={this.state.playing} />
           <AlbumList type="Singles and EPs" albums={this.state.albums} playing={this.playing} currPlaying={this.state.playing} />
           <AlbumList type="Compilations" albums={this.state.albums} playing={this.playing} currPlaying={this.state.playing} />
           <AlbumList type="Appears On" albums={this.state.features} playing={this.playing} currPlaying={this.state.playing} />
-        </div>
+        </MainAlbumsWrapper>
       );
     }
     return (
