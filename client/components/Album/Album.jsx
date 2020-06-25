@@ -2,14 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import {GrCirclePlay} from 'react-icons/gr';
 
-const AlbumWrapper = styled.div`
-  float: left;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 50px;
-  width: 180;
-`;
-
 const AlbumCover = styled.img`
   width:180px;
   height:180px;
@@ -26,12 +18,39 @@ const PlayButton = styled.img`
   margin: auto auto;
   width:70px;
   height:70px;
+  &:hover {
+    width:73px;
+    height:73px;
+  };
 `; // change percentages and size as needed and make sure it's centered
 
 const AlbumTitle = styled.div`
   text-align: center;
   font-size: small;
   margin-top: 10px;
+  &:hover {
+    text-decoration: underline;
+  };
+`;
+
+const AlbumCoverWrapper = styled.div`
+  position: relative;
+  width:180px;
+  height:180px;
+`;
+
+const AlbumWrapper = styled.div`
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 50px;
+  width: 180;
+  &:hover ${AlbumCover} {
+    opacity: .5;
+  };
+  &:hover ${PlayButton} {
+    display: block;
+  };
 `;
 
 class Album extends React.Component {
@@ -166,10 +185,10 @@ class Album extends React.Component {
     // also renders an album title underneath that underlines on hover but doesn't have clickable functionality as that is outside the scope of the artist page, theoretically in actual spotify a click will take you to the album's page though
     return (
       <AlbumWrapper ref={this.myRef} className="album" id={this.props.key}>
-        <div id="album-cover-wrapper">
+        <AlbumCoverWrapper id="album-cover-wrapper">
           <AlbumCover ref="albumcover" id="album-cover" src={this.props.album.imageUrl} alt="" />
           <PlayButton ref="playbutton" id="play-button" src={this.state.buttonUrls[this.state.buttonIndex]} alt="" onClick={this.play} />
-        </div>
+        </AlbumCoverWrapper>
         <AlbumTitle id="album-title">
           {this.props.album.title}
         </AlbumTitle>

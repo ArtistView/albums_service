@@ -8,25 +8,6 @@ body {
   font-style: normal;
   font-weight: bold;
 }
-.album:hover #album-cover{
-  opacity: .5;
-}
-#album-cover-wrapper{
-  position: relative;
-  width:180px;
-  height:180px;
-}
-#play-button:hover{
-  width:73px;
-  height:73px;
-}
-.album:hover #play-button{
-  display: block;
-}
-#album-title:hover {
-  text-decoration: underline;
-  /* right now anywhere on the line of the text makes it underline, but we want just the actual text not the whole div*/
-}
 #album-up-arrow{
   font-size: 18px;
   margin-left: 5px;
