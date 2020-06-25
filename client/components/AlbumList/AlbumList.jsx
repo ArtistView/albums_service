@@ -3,12 +3,26 @@ import Album from '../Album/Album.jsx';
 import styled, { css } from 'styled-components';
 import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
 
+const AlbumListWrapper = styled.div`
+  width: 1200;
+`;
+
 const AlbumListTitle = styled.div`
   font-size: x-large;
   margin-top: 65px;
   margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;
+`;
+
+const AlbumListShowMoreLess = styled.div`
+  letter-spacing: 2px;
+  clear: both;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 11px;
+  font-weight: normal;
+  position: relative;
 `;
 
 class AlbumList extends React.Component {
@@ -96,16 +110,16 @@ class AlbumList extends React.Component {
     // the albums list component renders a title, which is the type, a list of album components and a show more/less button with clickable functionality
     if (this.state.showAtAll) {
       return(
-        <div className="album-list">
+        <AlbumListWrapper className="album-list">
           <AlbumListTitle className="album-list-title">{this.state.type}</AlbumListTitle>
           <div className="album-list-list">
             {this.state.currShowing.map((album) => <Album album={album} key={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} />)}
           </div>
-          <div className="album-list-show-more-less" onClick={this.showMoreLess}>
+          <AlbumListShowMoreLess className="album-list-show-more-less" onClick={this.showMoreLess}>
             {this.state.showMoreText}
             {this.state.showMoreArrow}
-          </div>
-        </div>
+          </AlbumListShowMoreLess>
+        </AlbumListWrapper>
       );
     }
     return <div id="no-albums-of-this-type" />;

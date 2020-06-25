@@ -8,38 +8,14 @@ body {
   font-style: normal;
   font-weight: bold;
 }
-/* .album{
-  float: left;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 50px;
-  width: 180;
-} */
 .album:hover #album-cover{
   opacity: .5;
 }
-/* #album-cover {
-  width:180px;
-  height:180px;
-  object-fit: cover;
-} */
 #album-cover-wrapper{
   position: relative;
   width:180px;
   height:180px;
 }
-/* #play-button{
-  display: none;
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto auto;
-  /* change percentages and size as needed and make sure it's centered*/
-  /* width:70px;
-  height:70px;
-} */
 #play-button:hover{
   width:73px;
   height:73px;
@@ -47,31 +23,9 @@ body {
 .album:hover #play-button{
   display: block;
 }
-/* #album-title{
-  text-align: center;
-  font-size: small;
-  margin-top: 10px;
-} */
 #album-title:hover {
   text-decoration: underline;
   /* right now anywhere on the line of the text makes it underline, but we want just the actual text not the whole div*/
-}
-/* .album-list-title{
-  font-size: x-large;
-  margin-top: 65px;
-  margin-bottom: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
-} */
-.album-list-show-more-less{
-  letter-spacing: 2px;
-  clear: both;
-  text-align: center;
-  margin-top: 20px;
-  font-size: 11px;
-  font-weight: normal;
-  position: relative;
-  /* make it look more like the spotify one  */
 }
 #album-up-arrow{
   font-size: 18px;
@@ -84,7 +38,4 @@ body {
   margin-left: 5px;
   position: absolute;
   bottom: -2;
-}
-.album-list{
-  width: 1200;
 }
