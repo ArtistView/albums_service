@@ -1,14 +1,5 @@
-body {
-  background-color:#151515;
-}
-#app{
-  color: white;
-  font-family: proxima-nova, sans-serif;
-  /* this font is close but not quite, a little too thick and less round */
-  font-style: normal;
-  font-weight: bold;
-}
 #album-up-arrow{
+  /* maybe try and refactor to styled icons later  */
   font-size: 18px;
   margin-left: 5px;
   position: absolute;
@@ -20,3 +11,4 @@ body {
   position: absolute;
   bottom: -2;
 }
+/* all other styling has been done in the styled components within the react files  */
