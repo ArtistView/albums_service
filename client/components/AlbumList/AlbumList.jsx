@@ -1,6 +1,15 @@
 import React from 'react';
 import Album from '../Album/Album.jsx';
+import styled, { css } from 'styled-components';
 import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
+
+const AlbumListTitle = styled.div`
+  font-size: x-large;
+  margin-top: 65px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+`;
 
 class AlbumList extends React.Component {
   // this component accepts a list of albums as props along with a playing function and currPlaying variable that are just needed to pass down to the album component, so it can modify the global state of which album is playing
@@ -88,7 +97,7 @@ class AlbumList extends React.Component {
     if (this.state.showAtAll) {
       return(
         <div className="album-list">
-          <div className="album-list-title">{this.state.type}</div>
+          <AlbumListTitle className="album-list-title">{this.state.type}</AlbumListTitle>
           <div className="album-list-list">
             {this.state.currShowing.map((album) => <Album album={album} key={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} />)}
           </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import styled, { css } from 'styled-components';
 import AlbumList from './components/AlbumList/AlbumList.jsx';
 
 class App extends React.Component {

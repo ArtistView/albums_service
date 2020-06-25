@@ -1,53 +1,45 @@
-/* @import url('http://www.fontbros.com/families/proxima-nova?src=GoogleFonts'); */
 body {
   background-color:#151515;
 }
 #app{
-  /* background-color: black; */
   color: white;
   font-family: proxima-nova, sans-serif;
   /* this font is close but not quite, a little too thick and less round */
-  /* font-family: 'El Messiri', sans-serif; */
   font-style: normal;
   font-weight: bold;
 }
-.album{
-  /* background-color: black; */
+/* .album{
   float: left;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 50px;
   width: 180;
-}
+} */
 .album:hover #album-cover{
   opacity: .5;
 }
-#album-cover {
+/* #album-cover {
   width:180px;
   height:180px;
   object-fit: cover;
-}
+} */
 #album-cover-wrapper{
   position: relative;
   width:180px;
   height:180px;
 }
-#play-button{
+/* #play-button{
   display: none;
   position: absolute;
-  /* left: 30%;
-  top: 30%;
-  vertical-align: middle; */
   right: 0;
   left: 0;
   top: 0;
   bottom: 0;
   margin: auto auto;
-
   /* change percentages and size as needed and make sure it's centered*/
-  width:70px;
+  /* width:70px;
   height:70px;
-}
+} */
 #play-button:hover{
   width:73px;
   height:73px;
@@ -55,22 +47,22 @@ body {
 .album:hover #play-button{
   display: block;
 }
-#album-title{
+/* #album-title{
   text-align: center;
   font-size: small;
   margin-top: 10px;
-}
+} */
 #album-title:hover {
   text-decoration: underline;
   /* right now anywhere on the line of the text makes it underline, but we want just the actual text not the whole div*/
 }
-.album-list-title{
+/* .album-list-title{
   font-size: x-large;
   margin-top: 65px;
   margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;
-}
+} */
 .album-list-show-more-less{
   letter-spacing: 2px;
   clear: both;

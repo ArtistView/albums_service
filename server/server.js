@@ -34,7 +34,7 @@ app.get('/albums/:artistId', (req, res) => {
     });
 });
 app.get('/albums/features/:artistId', (req, res) => {
-  console.log('running request', req.params);
+  // console.log('running request', req.params);
   // try to refactor this to get into router later but for now it works
   // also add tests
   db.Album.find({ featuredArtists: req.params.artistId })

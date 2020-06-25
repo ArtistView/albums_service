@@ -1,5 +1,38 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 import {GrCirclePlay} from 'react-icons/gr';
+
+const AlbumWrapper = styled.div`
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 50px;
+  width: 180;
+`;
+
+const AlbumCover = styled.img`
+  width:180px;
+  height:180px;
+  object-fit: cover;
+`;
+
+const PlayButton = styled.img`
+  display: none;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto auto;
+  width:70px;
+  height:70px;
+`; // change percentages and size as needed and make sure it's centered
+
+const AlbumTitle = styled.div`
+  text-align: center;
+  font-size: small;
+  margin-top: 10px;
+`;
 
 class Album extends React.Component {
   // takes in an album object as a prop as well as a startPlaying function, which modifies the app state for which album is playing and a currPlaying property which stores the app state for which album is playing
@@ -132,16 +165,16 @@ class Album extends React.Component {
     // renders an album cover with a play button on top of it that has clickable functionality
     // also renders an album title underneath that underlines on hover but doesn't have clickable functionality as that is outside the scope of the artist page, theoretically in actual spotify a click will take you to the album's page though
     return (
-      <div ref={this.myRef} className="album" id={this.props.key}>
+      <AlbumWrapper ref={this.myRef} className="album" id={this.props.key}>
         <div id="album-cover-wrapper">
-          <img ref="albumcover" id="album-cover" src={this.props.album.imageUrl} alt="" />
-          <img ref="playbutton" id="play-button" src={this.state.buttonUrls[this.state.buttonIndex]} alt="" onClick={this.play} />
+          <AlbumCover ref="albumcover" id="album-cover" src={this.props.album.imageUrl} alt="" />
+          <PlayButton ref="playbutton" id="play-button" src={this.state.buttonUrls[this.state.buttonIndex]} alt="" onClick={this.play} />
         </div>
-        <div id="album-title">
+        <AlbumTitle id="album-title">
           {this.props.album.title}
-        </div>
+        </AlbumTitle>
         {/* <audio ref="audioFile" src={this.state.audio} onEnded={this.playNext} /> */}
-      </div>
+      </AlbumWrapper>
     );
   }
 }
