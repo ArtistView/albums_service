@@ -45,9 +45,15 @@ describe('My App Tests', () => {
   it('Show more/less button toggles the text', () => {
     // maybe also check that the icons switched
     // TODO: only run this test when there are more then 12 albums of a particular type and test that it doesn't show if this condition isn't met
-    cy.contains('SHOW MORE');
-    cy.get('.album-list-show-more-less:visible').click({multiple: true});
-    cy.contains('SHOW LESS');
+    if (cy.get('.album-list-show-more-less:visible').length > 0) {
+      cy.contains('SHOW MORE'); // checks if show more is visible
+      cy.get('.album-list-show-more-less:visible').click({multiple: true}); // clicks all the visible buttons
+      cy.contains('SHOW LESS'); // checks if show less is visible
+      cy.get('.album-list-show-more-less:visible').click({multiple: true}); // clicks all the visible buttons
+      cy.contains('SHOW MORE'); // checks if show more is visible
+    } else {
+      cy.contains('SHOW MORE').should('not.exist'); // check to make sure the button isn't showing
+    }
   });
   // TODO: test the show more and show less functions
 });
