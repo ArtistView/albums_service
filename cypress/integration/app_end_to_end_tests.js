@@ -26,6 +26,7 @@ describe('My App Tests', () => {
     cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play again
   });
   it('play/pause toggles on click of another album', () => { // check if the play button switches to pause on click
+    // this will fail in the case of there only being one album on the entire page
     cy.get('.album').eq(0).find('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play at first
     cy.get('.album').eq(0).find('#play-button').first().click({ force: true }); // clicks the button (force must be true bc it only turns visible on hover and this doesn't mess with css)
     cy.get('.album').eq(0).find('#play-button').first().should('have.attr', 'src').should('include', playPauseList[1]); // checks if it shows pause
@@ -35,13 +36,14 @@ describe('My App Tests', () => {
     cy.get('.album').eq(1).find('#play-button').click({ force: true }); // click on pause on second album
     cy.get('.album').eq(1).find('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if the second album shows play again
   });
-  it('play/pause toggles turns on and off audio', () => { // instead of checking the images check the audio here
-    // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play at first
-    cy.get('#play-button').click({ force: true }); // clicks the button (force must be true bc it only turns visible on hover and this doesn't mess with css)
-    // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[1]); // checks if it shows pause
-    cy.get('#play-button').click({ force: true }); // changes it back
-    // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play again
-  });
+  // TODO: test if the audio is being played (and if it's the right audio) upon the click of the play/pause button
+  // it('play/pause toggles turns on and off audio', () => { // instead of checking the images check the audio here
+  //   // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play at first
+  //   cy.get('#play-button').click({ force: true }); // clicks the button (force must be true bc it only turns visible on hover and this doesn't mess with css)
+  //   // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[1]); // checks if it shows pause
+  //   cy.get('#play-button').click({ force: true }); // changes it back
+  //   // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play again
+  // });
   it('Show more/less button toggles the text', () => {
     // maybe also check that the icons switched
     // TODO: only run this test when there are more then 12 albums of a particular type and test that it doesn't show if this condition isn't met
