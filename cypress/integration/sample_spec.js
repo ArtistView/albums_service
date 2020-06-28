@@ -6,4 +6,8 @@ describe('My App Tests', () => {
     cy.contains(/Albums|Singles and EPs|Collaborations|Appears On/g);
     // check if the app contains any of those texts
   });
+  it('album cover gets darker on hover', () => {
+    cy.get('.album').first().trigger('mouseover'); // hovering over the first album
+    cy.get('#album-cover').first().should('have.css', 'opacity', '.5');
+  });
 });

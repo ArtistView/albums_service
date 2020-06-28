@@ -113,7 +113,7 @@ class AlbumList extends React.Component {
         <AlbumListWrapper className="album-list">
           <AlbumListTitle className="album-list-title">{this.state.type}</AlbumListTitle>
           <div className="album-list-list">
-            {this.state.currShowing.map((album) => <Album album={album} key={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} />)}
+            {this.state.currShowing.map((album) => <Album album={album} id={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} />)}
           </div>
           <AlbumListShowMoreLess className="album-list-show-more-less" onClick={this.showMoreLess}>
             {this.state.showMoreText}
