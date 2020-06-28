@@ -11,7 +11,8 @@
     "start": "nodemon ./server/server.js",
     "babel": "./node_modules/.bin/babel client --out-dir public --presets @babel/preset-react --source-maps inline",
     "react-dev": "webpack -d --watch",
-    "test": "jest"
+    "test": "jest",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@babel/cli": "^7.10.1",
@@ -33,6 +34,7 @@
     "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-styled-components": "^1.10.7",
+    "cypress": "^4.9.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
