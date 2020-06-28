@@ -8,9 +8,9 @@ describe('My App Tests', () => {
   });
   it('album cover gets darker on hover', () => {
     cy.get('#album-cover').first().should('have.css', 'opacity', '1'); // the album cover should start with an opacity of one when it's not hovered over
-    cy.get('.album').first().trigger('mouseenter'); // hovering over the first album
-    cy.get('#album-cover').first().should('have.css', 'opacity', '.5'); // check if the opacity changed
-    cy.get('.album').first().trigger('mouseleave'); // stop hovering over the first album
+    cy.get('.album').first().invoke('mouseover') // hovering over the first album
+      .then(cy.get('#album-cover').should('have.css', 'opacity', '.5')); // check if the opacity changed
+    // cy.get('.album').first().trigger('mouseleave'); // stop hovering over the first album
     cy.get('#album-cover').first().should('have.css', 'opacity', '1'); // check if the opacity changed back
   });
 });
