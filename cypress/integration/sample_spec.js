@@ -16,11 +16,21 @@ describe('My App Tests', () => {
   //   // cy.get('.album').first().trigger('mouseleave'); // stop hovering over the first album
   //   cy.get('#album-cover').first().should('have.css', 'opacity', '1'); // check if the opacity changed back
   // });
-  it('play/pause toggles on click', () => { // check if the play button switches to pause on click
-    cy.get('#play-button').first().should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play at first
-    cy.get('#play-button').first().click({ force: true }); // clicks the button (force must be true bc it only turns visible on hover and this doesn't mess with css)
-    cy.get('#play-button').first().should('have.attr', 'src').should('include', playPauseList[1]); // checks if it shows pause
-    cy.get('#play-button').first().click({ force: true }); // changes it back
-    cy.get('#play-button').first().should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play again
+  it('play/pause toggles on click of the button', () => { // check if the play button switches to pause on click
+    cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play at first
+    cy.get('#play-button').click({ force: true }); // clicks the button (force must be true bc it only turns visible on hover and this doesn't mess with css)
+    cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[1]); // checks if it shows pause
+    cy.get('#play-button').click({ force: true }); // changes it back
+    cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play again
+  });
+  it('play/pause toggles on click of another album', () => { // check if the play button switches to pause on click
+    cy.get('.album').eq(0).find('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play at first
+    cy.get('.album').eq(0).find('#play-button').first().click({ force: true }); // clicks the button (force must be true bc it only turns visible on hover and this doesn't mess with css)
+    cy.get('.album').eq(0).find('#play-button').first().should('have.attr', 'src').should('include', playPauseList[1]); // checks if it shows pause
+    cy.get('.album').eq(1).find('#play-button').click({ force: true }); // click on play on another album
+    cy.get('.album').eq(0).find('#play-button').first().should('have.attr', 'src').should('include', playPauseList[0]); // checks if the first album shows play
+    cy.get('.album').eq(1).find('#play-button').should('have.attr', 'src').should('include', playPauseList[1]); // checks if the second album shows pause now
+    cy.get('.album').eq(1).find('#play-button').click({ force: true }); // click on pause on second album
+    cy.get('.album').eq(1).find('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if the second album shows play again
   });
 });
