@@ -61,20 +61,24 @@ describe('My App Tests', () => {
   it('Shows more/less albums upon click of the button', () => {
     // maybe also check that the icons switched
     // TODO: only run this test when there are more then 12 albums of a particular type and test that it doesn't show if this condition isn't met
-    cy.get('.album-list').each((albumList) => {
-      console.log('albumList', albumList);
-      cy.get('.album-list-show-more-less:visible')
-        .then((data) => {
-          if (data.length > 0) {
-            albumList.get('.albums').its('length').should('eq', 12); // 12 albums should show at the start
-            albumList.get('.album-list-show-more-less:visible').click(); // clicks to show more
-            albumList.get('.albums').its('length').should('be.gte', 13); // more than 12 albums should be visible
-            albumList.get('.album-list-show-more-less:visible').click(); // clicks to show less
-            albumList.get('.albums').its('length').should('eq', 12); // only 12 albums should show again
-          } else {
-            albumList.get('.albums').its('length').should('be.lte', 12); // make sure there are 12 or fewer if the button doesn't show
-          }
-        });
+    let index = 0;
+    cy.get('.album-list').each(() => {
+      cy.get('.album-list').eq(index).within(() => {
+        // console.log('albumList', albumList);
+        cy.get('.album-list-show-more-less:visible')
+          .then((data) => {
+            if (data) {
+              cy.get('.album').its('length').should('eq', 12); // 12 albums should show at the start
+              cy.get('.album-list-show-more-less:visible').click(); // clicks to show more
+              cy.get('.album').its('length').should('be.gte', 13); // more than 12 albums should be visible
+              cy.get('.album-list-show-more-less:visible').click(); // clicks to show less
+              cy.get('.album').its('length').should('eq', 12); // only 12 albums should show again
+            } else {
+              cy.get('.album').its('length').should('be.lte', 12); // make sure there are 12 or fewer if the button doesn't show
+            }
+          });
+      });
+      index++;
     });
     // cy.get('.album-list-show-more-less:visible')
     //   .then((data) => {
