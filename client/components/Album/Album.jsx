@@ -25,26 +25,29 @@ const PlayButton = styled.img`
 `; // change percentages and size as needed and make sure it's centered
 
 const AlbumTitle = styled.div`
-  text-align: center;
   font-size: small;
   margin-top: 10px;
   &:hover {
     text-decoration: underline;
   };
+  display: inline-block;
 `;
 
 const AlbumCoverWrapper = styled.div`
   position: relative;
-  width:180px;
-  height:180px;
+  width:173.25px;
+  height:173.25px;
 `;
 
+// resize to fit the 232 offset margin
 const AlbumWrapper = styled.div`
+  position: relative;
+  text-align: center;
   float: left;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 11px;
+  margin-right: 11px;
   margin-bottom: 50px;
-  width: 180;
+  width: 173.25px;
   &:hover ${AlbumCover} {
     opacity: .5;
   };
@@ -73,7 +76,7 @@ class Album extends React.Component {
   }
 
   componentDidMount() {
-    this.getSongs(this.props.album.songs);
+    this.getSongs(this.props.album._id);
     // console.log(this.state);
     // upon loading the component it sets the currently playing song in state to be the first song in the album
     // honestly idk if this is what we want to do though, might just want to wait til play is pressed to get the songs from the db
@@ -98,39 +101,50 @@ class Album extends React.Component {
       });
       // need to test this stuff
     }
+    if(this.props.currPlaying === this.props.album._id && this.props.show === true && this.state.playing === true) { // if this is playing but was collapsed through the show less button
+      this.refs.albumcover.style.opacity = 0.5;
+      this.refs.playbutton.style.display = 'block';
+      // this changes it to showing but it keeps these style settings permanently, won't change it back to the defaults when I press pause
+    }
   }
 
-  getSongs(songs) {
-    // gets the song object from the database by id
-    // corresponding route within the server.js actually makes the db query
-    songs.forEach((song) => {
-      const songId = song;
-      // console.log(songId, song);
-      const url = `http://localhost:3273/songs/${songId}`;
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          this.setState({
-            audio: new Audio(this.state.audioList[this.state.currSongIndex]),
-            audioList: this.state.audioList.concat(data.mp3),
-          });
-          this.state.audio.addEventListener('ended', () => {
-            this.playNext(); // add event listener to the audio that plays the next song once it ends
-          });
-          // }
-        })
-        .catch((err) => {
-          console.error(err);
+  getSongs(album) {
+    const url = `http://localhost:3273/songs/byAlbum/${album}`;
+    fetch(url) // fetches the list of mp3s for the given album
+      .then((response) => response.json())
+      .then((data) => {
+        if (this.props.album.title === 'The Squarepants V' || this.props.album.title === 'The Squarepants') {
+          console.log(this.props.album.title, '\'s songs are', data);
+        }
+        this.setState({
+          audioList: data,
         });
-    });
+      })
+      .then(() => {
+        if (this.props.album.title === 'The Squarepants V' || this.props.album.title === 'The Squarepants') {
+          console.log(this.props.album.title, '\'s audio is', this.state.audio);
+        }
+        this.setState({
+          audio: new Audio(this.state.audioList[this.state.currSongIndex]),
+        });
+        // console.log('audio list for',this.props.album.title, this.state.audioList);
+        this.state.audio.addEventListener('ended', () => {
+          this.playNext(); // add event listener to the audio that plays the next song once it ends
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   play(event) {
     // on click of the play button, we toggle the play and pause images and implement functionality and styling
     // need to actually implement the play/pause music functionality by grabbing the mp3 from currently playing and playing it
+    // console.log('current song', this.state.currSongIndex, this.state.audio, 'list of songs', this.state.audioList, 'song id list', this.props.album.songs);
     if (this.state.playing === false) {
       event.target.style.display = 'block'; // makes the pause button persist even after hover
       this.props.startPlaying(this.props.album._id); // changes the global state to be playing this album
+      // this.props.updateAudio(this.state.audio, this.state.currSongIndex); // update the global state
       // this will trigger any other album that is playing to stop through the componentDidUpdate method
       this.refs.albumcover.style.opacity = 0.5; // the album cover will stay darker when the pause is showing as if it was being hovered over
       this.state.audio.play(); // plays the audio from the mp3 file for the current song
@@ -141,6 +155,7 @@ class Album extends React.Component {
         buttonIndex: 1,
       });
     } else {
+      console.log('pausing', event.target);
       event.target.style.display = '';
       this.refs.albumcover.style.opacity = '';
       // the above two lines make the play button return to normal hover behavior as we set in css
@@ -154,47 +169,54 @@ class Album extends React.Component {
 
   playNext() {
     // this method will go to the next song in the album list and play it
-    console.log('invoking play next');
-    if (this.state.currSongIndex > this.state.audioList.length) {
-      console.log('end of the album');
+    this.setState({ // increments the current song before checking if the album has ended
+      currSongIndex: this.state.currSongIndex + 1,
+    });
+    if (this.state.currSongIndex >= this.state.audioList.length) {
       // if there are no more songs left in the album, reset the current song to the beginning of the album but don't play it
       this.setState({
         playing: false,
         buttonIndex: 0,
         audio: new Audio(this.state.audioList[0]),
-      });
-      this.state.audio.addEventListener('ended', () => {
-        this.playNext();
+        currSongIndex: 0,
       });
       this.refs.playbutton.style.display = '';
       this.refs.albumcover.style.opacity = '';
+      this.state.audio.addEventListener('ended', () => {
+        this.playNext();
+      });
+      // this.props.updateAudio(this.state.audio, this.state.currSongIndex); // update the global state
       // makes the play button return to normal hover behavior as we set in css
     } else {
-      // if there are more songs in the list increment the current song by one and play the song
+      // if there are more songs in the list play the next song (which was incremented before the else)
       this.setState({
-        audio: new Audio(this.state.audioList[this.state.currSongIndex + 1]),
-        currSongIndex: this.state.currSongIndex + 1,
+        audio: new Audio(this.state.audioList[this.state.currSongIndex]),
       });
       this.state.audio.play();
-      console.log('play next song', this.state);
+      this.state.audio.addEventListener('ended', () => {
+        this.playNext();
+      });
+      // this.props.updateAudio(this.state.audio, this.state.currSongIndex); // update the global state
     }
   }
 
   render() {
     // renders an album cover with a play button on top of it that has clickable functionality
     // also renders an album title underneath that underlines on hover but doesn't have clickable functionality as that is outside the scope of the artist page, theoretically in actual spotify a click will take you to the album's page though
-    return (
-      <AlbumWrapper ref={this.myRef} className="album" id={this.props.key}>
-        <AlbumCoverWrapper id="album-cover-wrapper">
-          <AlbumCover ref="albumcover" id="album-cover" src={this.props.album.imageUrl} alt="" />
-          <PlayButton ref="playbutton" id="play-button" src={this.state.buttonUrls[this.state.buttonIndex]} alt="" onClick={this.play} />
-        </AlbumCoverWrapper>
-        <AlbumTitle id="album-title">
-          {this.props.album.title}
-        </AlbumTitle>
-        {/* <audio ref="audioFile" src={this.state.audio} onEnded={this.playNext} /> */}
-      </AlbumWrapper>
-    );
+    if (this.props.show) { // if it should be showing
+      return (
+        <AlbumWrapper ref={this.myRef} className="album" id={this.props.key}>
+          <AlbumCoverWrapper id="album-cover-wrapper">
+            <AlbumCover ref="albumcover" id="album-cover" src={this.props.album.imageUrl} alt="" />
+            <PlayButton ref="playbutton" id="play-button" src={this.state.buttonUrls[this.state.buttonIndex]} alt="" onClick={this.play} />
+          </AlbumCoverWrapper>
+          <AlbumTitle id="album-title">
+            {this.props.album.title}
+          </AlbumTitle>
+        </AlbumWrapper>
+      );
+    }
+    return (<div />);
   }
 }
 

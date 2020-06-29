@@ -27,6 +27,7 @@ describe('My App Tests', () => {
   });
   it('play/pause toggles on click of another album', () => { // check if the play button switches to pause on click
     // this will fail in the case of there only being one album on the entire page
+    // add in a check for that and make the test pass if there is only 1 album (or i guess no albums but that case is not realistic)
     cy.get('.album').eq(0).find('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play at first
     cy.get('.album').eq(0).find('#play-button').first().click({ force: true }); // clicks the button (force must be true bc it only turns visible on hover and this doesn't mess with css)
     cy.get('.album').eq(0).find('#play-button').first().should('have.attr', 'src').should('include', playPauseList[1]); // checks if it shows pause
@@ -45,8 +46,6 @@ describe('My App Tests', () => {
   //   // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play again
   // });
   it('Show more/less button toggles the text', () => {
-    // maybe also check that the icons switched
-    // TODO: only run this test when there are more then 12 albums of a particular type and test that it doesn't show if this condition isn't met
     let index = 0;
     cy.get('.album-list').each(() => { // for each album list
       cy.get('.album-list').eq(index).within(() => { // searches within that particular album list
@@ -54,10 +53,13 @@ describe('My App Tests', () => {
           .then((data) => {
             if (data.is(':visible')) { // if the component is visible
               cy.contains('SHOW MORE'); // checks if show more is visible
+              cy.get('#album-down-arrow').should('exist'); // checks if the down arrow is present
               cy.get('.album-list-show-more-less').click(); // clicks all the visible buttons
               cy.contains('SHOW LESS'); // checks if show less is visible
+              cy.get('#album-up-arrow').should('exist'); // checks if the up arrow is present
               cy.get('.album-list-show-more-less').click(); // clicks all the visible buttons
               cy.contains('SHOW MORE'); // checks if show more is visible
+              cy.get('#album-down-arrow').should('exist'); // checks if the down arrow is present
             } else {
               cy.contains('SHOW MORE').should('not.exist'); // check to make sure the button isn't showing
             }
@@ -73,13 +75,13 @@ describe('My App Tests', () => {
         cy.get('.album-list-show-more-less')
           .then((data) => {
             if (data.is(':visible')) { // if the component is visible
-              cy.get('.album').its('length').should('eq', 12); // 12 albums should show at the start
+              cy.get('.album:visible').its('length').should('eq', 12); // 12 albums should show at the start
               cy.get('.album-list-show-more-less:visible').click(); // clicks to show more
-              cy.get('.album').its('length').should('be.gte', 13); // more than 12 albums should be visible
+              cy.get('.album:visible').its('length').should('be.gte', 13); // more than 12 albums should be visible
               cy.get('.album-list-show-more-less:visible').click(); // clicks to show less
-              cy.get('.album').its('length').should('eq', 12); // only 12 albums should show again
+              cy.get('.album:visible').its('length').should('eq', 12); // only 12 albums should show again
             } else {
-              cy.get('.album').its('length').should('be.lte', 12); // make sure there are 12 or fewer if the button doesn't show
+              cy.get('.album:visible').its('length').should('be.lte', 12); // make sure there are 12 or fewer if the button doesn't show
             }
           });
       });

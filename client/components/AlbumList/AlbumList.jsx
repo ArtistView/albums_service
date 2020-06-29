@@ -4,12 +4,13 @@ import styled, { css } from 'styled-components';
 import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
 
 const AlbumListWrapper = styled.div`
-  width: 1200;
+  margin-left: 10px;
+  background-color: #151515;
 `;
 
 const AlbumListTitle = styled.div`
   font-size: x-large;
-  margin-top: 65px;
+  padding-top: 65px;
   margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;
@@ -87,6 +88,7 @@ class AlbumList extends React.Component {
   // need to write tests
 
   showMoreLess(event) {
+    // TODO: need to make it so all albums exist no matter what but are only visible when showing more
     if (this.state.showMore === false) {
       // if it's currently showing twelve make it show all of the albums and change the text
       this.setState({
@@ -113,7 +115,14 @@ class AlbumList extends React.Component {
         <AlbumListWrapper className="album-list">
           <AlbumListTitle className="album-list-title">{this.state.type}</AlbumListTitle>
           <div className="album-list-list">
-            {this.state.currShowing.map((album) => <Album album={album} id={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} />)}
+            {this.state.albums.map((album) => {
+              let showing = false;
+              if (this.state.currShowing.includes(album)) {
+                showing = true;
+              }
+              return (<Album album={album} id={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} show={showing} />);
+            })
+            }
           </div>
           <AlbumListShowMoreLess className="album-list-show-more-less" onClick={this.showMoreLess}>
             {this.state.showMoreText}
