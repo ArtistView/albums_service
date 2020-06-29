@@ -4,13 +4,13 @@ import styled, { css } from 'styled-components';
 import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
 
 const AlbumListWrapper = styled.div`
-  width: 1200;
   margin-left: 10px;
+  background-color: #151515;
 `;
 
 const AlbumListTitle = styled.div`
   font-size: x-large;
-  margin-top: 65px;
+  padding-top: 65px;
   margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;

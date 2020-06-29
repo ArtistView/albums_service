@@ -24,7 +24,6 @@ const PlayButton = styled.img`
   };
 `; // change percentages and size as needed and make sure it's centered
 
-// fix underline thing
 const AlbumTitle = styled.div`
   font-size: small;
   margin-top: 10px;
@@ -115,9 +114,10 @@ class Album extends React.Component {
         .then((response) => response.json())
         .then((data) => {
           this.setState({
-            audio: new Audio(this.state.audioList[this.state.currSongIndex]),
             audioList: this.state.audioList.concat(data.mp3),
+            audio: new Audio(this.state.audioList[this.state.currSongIndex]),
           });
+          // console.log('audio', this.state.audio, 'audio list', this.state.audioList);
           this.state.audio.addEventListener('ended', () => {
             this.playNext(); // add event listener to the audio that plays the next song once it ends
           });
@@ -132,6 +132,7 @@ class Album extends React.Component {
   play(event) {
     // on click of the play button, we toggle the play and pause images and implement functionality and styling
     // need to actually implement the play/pause music functionality by grabbing the mp3 from currently playing and playing it
+    // console.log('current song', this.state.currSongIndex, this.state.audio, this.state.audioList, this.props.album.songs);
     if (this.state.playing === false) {
       event.target.style.display = 'block'; // makes the pause button persist even after hover
       this.props.startPlaying(this.props.album._id); // changes the global state to be playing this album
@@ -158,28 +159,33 @@ class Album extends React.Component {
 
   playNext() {
     // this method will go to the next song in the album list and play it
-    // console.log('invoking play next');
-    if (this.state.currSongIndex > this.state.audioList.length) {
-      // console.log('end of the album');
+    this.setState({ // increments the current song before checking if the album has ended
+      currSongIndex: this.state.currSongIndex + 1,
+    });
+    if (this.state.currSongIndex >= this.state.audioList.length) {
       // if there are no more songs left in the album, reset the current song to the beginning of the album but don't play it
       this.setState({
         playing: false,
         buttonIndex: 0,
         audio: new Audio(this.state.audioList[0]),
-      });
-      this.state.audio.addEventListener('ended', () => {
-        this.playNext();
+        currSongIndex: 0,
       });
       this.refs.playbutton.style.display = '';
       this.refs.albumcover.style.opacity = '';
+      this.state.audio.addEventListener('ended', () => {
+        this.playNext();
+      });
       // makes the play button return to normal hover behavior as we set in css
     } else {
       // if there are more songs in the list increment the current song by one and play the song
       this.setState({
-        audio: new Audio(this.state.audioList[this.state.currSongIndex + 1]),
-        currSongIndex: this.state.currSongIndex + 1,
+        audio: new Audio(this.state.audioList[this.state.currSongIndex]),
+        // currSongIndex: this.state.currSongIndex + 1,
       });
       this.state.audio.play();
+      this.state.audio.addEventListener('ended', () => {
+        this.playNext();
+      });
       // console.log('play next song', this.state);
     }
   }
