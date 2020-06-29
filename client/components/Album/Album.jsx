@@ -101,7 +101,7 @@ class Album extends React.Component {
       });
       // need to test this stuff
     }
-    if(this.props.currPlaying === this.props.album._id && this.props.show === true) { // if this is playing but was collapsed through the show less button
+    if(this.props.currPlaying === this.props.album._id && this.props.show === true && this.state.playing === true) { // if this is playing but was collapsed through the show less button
       this.refs.albumcover.style.opacity = 0.5;
       this.refs.playbutton.style.display = 'block';
       // this changes it to showing but it keeps these style settings permanently, won't change it back to the defaults when I press pause
@@ -140,7 +140,7 @@ class Album extends React.Component {
   play(event) {
     // on click of the play button, we toggle the play and pause images and implement functionality and styling
     // need to actually implement the play/pause music functionality by grabbing the mp3 from currently playing and playing it
-    console.log('current song', this.state.currSongIndex, this.state.audio, 'list of songs', this.state.audioList, 'song id list', this.props.album.songs);
+    // console.log('current song', this.state.currSongIndex, this.state.audio, 'list of songs', this.state.audioList, 'song id list', this.props.album.songs);
     if (this.state.playing === false) {
       event.target.style.display = 'block'; // makes the pause button persist even after hover
       this.props.startPlaying(this.props.album._id); // changes the global state to be playing this album
@@ -213,7 +213,6 @@ class Album extends React.Component {
           <AlbumTitle id="album-title">
             {this.props.album.title}
           </AlbumTitle>
-          {/* <audio ref="audioFile" src={this.state.audio} onEnded={this.playNext} /> */}
         </AlbumWrapper>
       );
     }
