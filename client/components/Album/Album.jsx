@@ -104,20 +104,24 @@ class Album extends React.Component {
   }
 
   getSongs(songs) {
+    // for some reason the songs are not being added in the order they are listed within the album songs array
     // gets the song object from the database by id
     // corresponding route within the server.js actually makes the db query
+    console.log(this.props.album.title, songs);
     songs.forEach((song) => {
-      const songId = song;
+      // const songId = song;
       // console.log(songId, song);
-      const url = `http://localhost:3273/songs/${songId}`;
+      const url = `http://localhost:3273/songs/${song}`;
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
-          this.setState({
-            audioList: this.state.audioList.concat(data.mp3),
+          console.log(this.props.album.title, data);
+          this.setState((prevState) => ({
+            // audioList: prevState.audioList.concat(data.mp3),
+            audioList: [...prevState.audioList, data.mp3],
             audio: new Audio(this.state.audioList[this.state.currSongIndex]),
-          });
-          // console.log('audio', this.state.audio, 'audio list', this.state.audioList);
+          }));
+          console.log('audio list for',this.props.album.title, this.state.audioList);
           this.state.audio.addEventListener('ended', () => {
             this.playNext(); // add event listener to the audio that plays the next song once it ends
           });
@@ -132,7 +136,7 @@ class Album extends React.Component {
   play(event) {
     // on click of the play button, we toggle the play and pause images and implement functionality and styling
     // need to actually implement the play/pause music functionality by grabbing the mp3 from currently playing and playing it
-    // console.log('current song', this.state.currSongIndex, this.state.audio, this.state.audioList, this.props.album.songs);
+    console.log('current song', this.state.currSongIndex, this.state.audio, 'list of songs', this.state.audioList, 'song id list', this.props.album.songs);
     if (this.state.playing === false) {
       event.target.style.display = 'block'; // makes the pause button persist even after hover
       this.props.startPlaying(this.props.album._id); // changes the global state to be playing this album
@@ -177,16 +181,14 @@ class Album extends React.Component {
       });
       // makes the play button return to normal hover behavior as we set in css
     } else {
-      // if there are more songs in the list increment the current song by one and play the song
+      // if there are more songs in the list play the next song (which was incremented before the else)
       this.setState({
         audio: new Audio(this.state.audioList[this.state.currSongIndex]),
-        // currSongIndex: this.state.currSongIndex + 1,
       });
       this.state.audio.play();
       this.state.audio.addEventListener('ended', () => {
         this.playNext();
       });
-      // console.log('play next song', this.state);
     }
   }
 
