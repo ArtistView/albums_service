@@ -45,8 +45,6 @@ describe('My App Tests', () => {
   //   // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play again
   // });
   it('Show more/less button toggles the text', () => {
-    // maybe also check that the icons switched
-    // TODO: only run this test when there are more then 12 albums of a particular type and test that it doesn't show if this condition isn't met
     let index = 0;
     cy.get('.album-list').each(() => { // for each album list
       cy.get('.album-list').eq(index).within(() => { // searches within that particular album list
@@ -54,10 +52,13 @@ describe('My App Tests', () => {
           .then((data) => {
             if (data.is(':visible')) { // if the component is visible
               cy.contains('SHOW MORE'); // checks if show more is visible
+              cy.get('#album-down-arrow').should('exist'); // checks if the down arrow is present
               cy.get('.album-list-show-more-less').click(); // clicks all the visible buttons
               cy.contains('SHOW LESS'); // checks if show less is visible
+              cy.get('#album-up-arrow').should('exist'); // checks if the up arrow is present
               cy.get('.album-list-show-more-less').click(); // clicks all the visible buttons
               cy.contains('SHOW MORE'); // checks if show more is visible
+              cy.get('#album-down-arrow').should('exist'); // checks if the down arrow is present
             } else {
               cy.contains('SHOW MORE').should('not.exist'); // check to make sure the button isn't showing
             }
