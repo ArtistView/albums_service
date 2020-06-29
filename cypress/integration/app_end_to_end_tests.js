@@ -75,13 +75,13 @@ describe('My App Tests', () => {
         cy.get('.album-list-show-more-less')
           .then((data) => {
             if (data.is(':visible')) { // if the component is visible
-              cy.get('.album').its('length').should('eq', 12); // 12 albums should show at the start
+              cy.get('.album:visible').its('length').should('eq', 12); // 12 albums should show at the start
               cy.get('.album-list-show-more-less:visible').click(); // clicks to show more
-              cy.get('.album').its('length').should('be.gte', 13); // more than 12 albums should be visible
+              cy.get('.album:visible').its('length').should('be.gte', 13); // more than 12 albums should be visible
               cy.get('.album-list-show-more-less:visible').click(); // clicks to show less
-              cy.get('.album').its('length').should('eq', 12); // only 12 albums should show again
+              cy.get('.album:visible').its('length').should('eq', 12); // only 12 albums should show again
             } else {
-              cy.get('.album').its('length').should('be.lte', 12); // make sure there are 12 or fewer if the button doesn't show
+              cy.get('.album:visible').its('length').should('be.lte', 12); // make sure there are 12 or fewer if the button doesn't show
             }
           });
       });
