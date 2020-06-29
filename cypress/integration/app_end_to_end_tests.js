@@ -27,6 +27,7 @@ describe('My App Tests', () => {
   });
   it('play/pause toggles on click of another album', () => { // check if the play button switches to pause on click
     // this will fail in the case of there only being one album on the entire page
+    // add in a check for that and make the test pass if there is only 1 album (or i guess no albums but that case is not realistic)
     cy.get('.album').eq(0).find('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play at first
     cy.get('.album').eq(0).find('#play-button').first().click({ force: true }); // clicks the button (force must be true bc it only turns visible on hover and this doesn't mess with css)
     cy.get('.album').eq(0).find('#play-button').first().should('have.attr', 'src').should('include', playPauseList[1]); // checks if it shows pause
