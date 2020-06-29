@@ -5,6 +5,7 @@ import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
 
 const AlbumListWrapper = styled.div`
   width: 1200;
+  margin-left: 10px;
 `;
 
 const AlbumListTitle = styled.div`

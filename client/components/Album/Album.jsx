@@ -24,27 +24,31 @@ const PlayButton = styled.img`
   };
 `; // change percentages and size as needed and make sure it's centered
 
+// fix underline thing
 const AlbumTitle = styled.div`
-  text-align: center;
   font-size: small;
   margin-top: 10px;
   &:hover {
     text-decoration: underline;
   };
+  display: inline-block;
 `;
 
 const AlbumCoverWrapper = styled.div`
   position: relative;
-  width:180px;
-  height:180px;
+  width:173.25px;
+  height:173.25px;
 `;
 
+// resize to fit the 232 offset margin
 const AlbumWrapper = styled.div`
+  position: relative;
+  text-align: center;
   float: left;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 11px;
+  margin-right: 11px;
   margin-bottom: 50px;
-  width: 180;
+  width: 173.25px;
   &:hover ${AlbumCover} {
     opacity: .5;
   };
@@ -154,9 +158,9 @@ class Album extends React.Component {
 
   playNext() {
     // this method will go to the next song in the album list and play it
-    console.log('invoking play next');
+    // console.log('invoking play next');
     if (this.state.currSongIndex > this.state.audioList.length) {
-      console.log('end of the album');
+      // console.log('end of the album');
       // if there are no more songs left in the album, reset the current song to the beginning of the album but don't play it
       this.setState({
         playing: false,
@@ -176,7 +180,7 @@ class Album extends React.Component {
         currSongIndex: this.state.currSongIndex + 1,
       });
       this.state.audio.play();
-      console.log('play next song', this.state);
+      // console.log('play next song', this.state);
     }
   }
 

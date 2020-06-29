@@ -9,6 +9,7 @@ const MainAlbumsWrapper = styled.div`
   font-family: proxima-nova, sans-serif;
   font-style: normal;
   font-weight: bold;
+  margin-left: 232px;
 `;
 
 class App extends React.Component {
