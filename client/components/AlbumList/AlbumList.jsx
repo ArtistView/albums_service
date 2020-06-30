@@ -53,14 +53,15 @@ class AlbumList extends React.Component {
     // upon loading we loop through all the albums from the artist and add only the ones that match our type to the array, which is then set to be albums in state
     if ($(window).width() < 1200) {
       await this.updateNumShowing();
-      this.populateAlbums();
-    } else {
-      this.populateAlbums();
+      // if the screen is smaller, update the number and wait for it to finish before moving on
     }
+    this.populateAlbums();
+    // populate the state with the correct albums
   }
   // need to write tests
 
   populateAlbums() {
+    // populates the state with albums that match the type
     let albumsOfType = [];
     if (this.state.type === 'Appears On') {
       albumsOfType = this.props.albums;
@@ -100,6 +101,7 @@ class AlbumList extends React.Component {
       });
     }
     window.addEventListener('resize', this.updateNumShowing);
+    // adds an event listener that updates the number of albums showing if the window resizes
   }
 
   updateNumShowing() {
