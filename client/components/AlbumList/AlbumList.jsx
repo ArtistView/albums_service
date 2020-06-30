@@ -89,7 +89,7 @@ class AlbumList extends React.Component {
     }
 
     window.addEventListener('resize', this.updateNumShowing);
-    // should set the state to hold the albums of the artist of the correct type
+    // adds an event listener that fixes show more/less as the window size changes
   }
   // need to write tests
 
@@ -97,7 +97,7 @@ class AlbumList extends React.Component {
     // set number to be the number of elements shown in the first two rows
     let number = 12;
     let width = $(window).width();
-    if (width > 1040 && width < 1150) {
+    if (width > 1040 && width < 1200) {
       number = 8;
     } else if (width < 1040 && width > 850) {
       number = 3;
@@ -106,19 +106,10 @@ class AlbumList extends React.Component {
     } else {
       number = 12;
     }
-    if (this.showMore === false) {
-      this.setState({
-        numToShow: number,
-        currShowing: this.state.albums.slice(0, number),
-        // updates this but only updates what is actually showing when I press show more/less
-        // also resize the album covers to fit as the window moves
-      });
-    } else {
-      this.setState({
-        numToShow: number,
-        // updates this but only updates what is actually showing when I press show more/less
-      });
-    }
+    this.setState({
+      numToShow: number,
+      currShowing: this.state.albums.slice(0, number),
+    });
   }
 
   showMoreLess(event) {

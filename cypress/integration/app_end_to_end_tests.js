@@ -69,6 +69,7 @@ describe('My App Tests', () => {
     });
   });
   it('Shows more/less albums upon click of the button and has fewer than 12 albums always if no button is visible', () => {
+    // need to update this test to get the number from the state rather than hardcode it at 12, will still probably work because it won't change the screen size
     let index = 0;
     cy.get('.album-list').each(() => { // for each album list
       cy.get('.album-list').eq(index).within(() => { // searches within that particular album list
