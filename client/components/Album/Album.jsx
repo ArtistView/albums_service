@@ -1,10 +1,11 @@
 import React from 'react';
+import $ from 'jquery';
 import styled, { css } from 'styled-components';
 import {GrCirclePlay} from 'react-icons/gr';
 
 const AlbumCover = styled.img`
-  width:180px;
-  height:180px;
+  width:173.25px;
+  height:173.25px;
   object-fit: cover;
 `;
 
@@ -73,13 +74,14 @@ class Album extends React.Component {
     this.play = this.play.bind(this);
     this.getSongs = this.getSongs.bind(this);
     this.playNext = this.playNext.bind(this);
+    this.updateSizing = this.updateSizing.bind(this);
   }
 
   componentDidMount() {
     this.getSongs(this.props.album._id);
-    // console.log(this.state);
-    // upon loading the component it sets the currently playing song in state to be the first song in the album
-    // honestly idk if this is what we want to do though, might just want to wait til play is pressed to get the songs from the db
+    // upon loading the component it gets the list of mp3 and sets them in state
+    window.addEventListener('resize', this.updateSizing);
+    // fills the albums to the window as the size changes
   }
 
   componentDidUpdate() {
@@ -105,6 +107,9 @@ class Album extends React.Component {
       this.refs.albumcover.style.opacity = 0.5;
       this.refs.playbutton.style.display = 'block';
       // this changes it to showing but it keeps these style settings permanently, won't change it back to the defaults when I press pause
+    }
+    if(this.props.show === true) {
+      this.updateSizing();
     }
   }
 
@@ -200,13 +205,41 @@ class Album extends React.Component {
     }
   }
 
+  updateSizing() {
+    // set number to be the number of elements shown in the first two rows
+    // does not like the extra elements when I move the screen around, stops showing them
+    let percentPerAlbum = 16.66;
+    let width = $(window).width();
+    if (width > 1040 && width < 1200) {
+      percentPerAlbum = 21;
+    } else if (width < 1040 && width > 850) {
+      percentPerAlbum = 28;
+    } else if (width < 850) {
+      percentPerAlbum = 43;
+    } else {
+      this.refs.albumwrapper.style.width = '';
+      this.refs.albumcoverwrapper.style.height = '';
+      this.refs.albumcoverwrapper.style.width = '';
+      this.refs.albumcover.style.height = '';
+      this.refs.albumcover.style.width = '';
+      return;
+    }
+    let size = (width - 232) * (percentPerAlbum / 100);
+    // console.log(size);
+    this.refs.albumwrapper.style.width = size;
+    this.refs.albumcoverwrapper.style.height = size;
+    this.refs.albumcoverwrapper.style.width = size;
+    this.refs.albumcover.style.height = size;
+    this.refs.albumcover.style.width = size;
+  }
+
   render() {
     // renders an album cover with a play button on top of it that has clickable functionality
     // also renders an album title underneath that underlines on hover but doesn't have clickable functionality as that is outside the scope of the artist page, theoretically in actual spotify a click will take you to the album's page though
     if (this.props.show) { // if it should be showing
       return (
-        <AlbumWrapper ref={this.myRef} className="album" id={this.props.key}>
-          <AlbumCoverWrapper id="album-cover-wrapper">
+        <AlbumWrapper ref="albumwrapper" className="album" id={this.props.key}>
+          <AlbumCoverWrapper ref="albumcoverwrapper" id="album-cover-wrapper">
             <AlbumCover ref="albumcover" id="album-cover" src={this.props.album.imageUrl} alt="" />
             <PlayButton ref="playbutton" id="play-button" src={this.state.buttonUrls[this.state.buttonIndex]} alt="" onClick={this.play} />
           </AlbumCoverWrapper>

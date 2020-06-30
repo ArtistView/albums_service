@@ -1,10 +1,11 @@
 import React from 'react';
+import $ from 'jquery';
 import Album from '../Album/Album.jsx';
 import styled, { css } from 'styled-components';
 import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
 
 const AlbumListWrapper = styled.div`
-  margin-left: 10px;
+  padding-left: 10px;
   background-color: #151515;
 `;
 
@@ -39,8 +40,11 @@ class AlbumList extends React.Component {
       showMoreArrow: '', // stores the icon to be rendered with the show more/less button
       showAtAll: false, // boolean telling us whether to show the component at all, should be false only if there are no albums of this particular type
       currShowing: [], // stores the list of albums to show, could be all the albums or just the first 12 depending on showMore
+      numToShow: 12, // stores the number of albums that should be shown when show more is not pressed, should change when the window shrinks
+      // TODO: update numToShow when the window shrinks and resize the albums to fit the window
     };
     this.showMoreLess = this.showMoreLess.bind(this);
+    this.updateNumShowing = this.updateNumShowing.bind(this);
   }
 
   componentDidMount() {
@@ -76,16 +80,44 @@ class AlbumList extends React.Component {
       });
     }
     // if there are more than 12, make sure the show more button appears and we start by only showing the first 12 albums
-    if (albumsOfType.length > 12) {
+    if (albumsOfType.length > this.state.numToShow) {
       this.setState({
         showMoreText: 'SHOW MORE',
-        currShowing: albumsOfType.slice(0,12),
+        currShowing: albumsOfType.slice(0, this.state.numToShow),
         showMoreArrow: <AiOutlineDown id="album-down-arrow" />,
       });
     }
-    // should set the state to hold the albums of the artist of the correct type
+
+    window.addEventListener('resize', this.updateNumShowing);
+    // adds an event listener that fixes show more/less as the window size changes
   }
   // need to write tests
+
+  updateNumShowing() {
+    // set number to be the number of elements shown in the first two rows
+    let number = 12;
+    let width = $(window).width();
+    if (width > 1040 && width < 1200) {
+      number = 8;
+    } else if (width < 1040 && width > 850) {
+      number = 3;
+    } else if (width < 850) {
+      number = 2;
+    } else {
+      number = 12;
+    }
+    if (this.state.showMore === true) {
+      this.setState({
+        numToShow: number,
+        currShowing: this.state.albums,
+      });
+    } else {
+      this.setState({
+        numToShow: number,
+        currShowing: this.state.albums.slice(0, number),
+      });
+    }
+  }
 
   showMoreLess(event) {
     // TODO: need to make it so all albums exist no matter what but are only visible when showing more
@@ -102,7 +134,7 @@ class AlbumList extends React.Component {
       this.setState({
         showMore: false,
         showMoreText: 'SHOW MORE',
-        currShowing: this.state.albums.slice(0, 12),
+        currShowing: this.state.albums.slice(0, this.state.numToShow),
         showMoreArrow: <AiOutlineDown id="album-down-arrow" />,
       });
     }
@@ -116,6 +148,7 @@ class AlbumList extends React.Component {
           <AlbumListTitle className="album-list-title">{this.state.type}</AlbumListTitle>
           <div className="album-list-list">
             {this.state.albums.map((album) => {
+              // want to rerun this map function when currShowing changes
               let showing = false;
               if (this.state.currShowing.includes(album)) {
                 showing = true;
