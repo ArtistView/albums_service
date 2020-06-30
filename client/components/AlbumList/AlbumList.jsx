@@ -49,6 +49,11 @@ class AlbumList extends React.Component {
 
   componentDidMount() {
     // upon loading we loop through all the albums from the artist and add only the ones that match our type to the array, which is then set to be albums in state
+    // if ($(window).width() < 1200) {
+    //   this.updateNumShowing();
+    //   // idk why this isn't updating the number based on the screen size initially
+    // }
+    // trying to update the number shown immediately if it is rendered on a smaller screen, only updates once the size changes right now
     let albumsOfType = [];
     if (this.state.type === 'Appears On') {
       albumsOfType = this.props.albums;
@@ -87,7 +92,6 @@ class AlbumList extends React.Component {
         showMoreArrow: <AiOutlineDown id="album-down-arrow" />,
       });
     }
-
     window.addEventListener('resize', this.updateNumShowing);
     // adds an event listener that fixes show more/less as the window size changes
   }
@@ -96,7 +100,7 @@ class AlbumList extends React.Component {
   updateNumShowing() {
     // set number to be the number of elements shown in the first two rows
     let number = 12;
-    let width = $(window).width();
+    const width = $(window).width();
     if (width > 1040 && width < 1200) {
       number = 8;
     } else if (width < 1040 && width > 850) {
@@ -117,12 +121,12 @@ class AlbumList extends React.Component {
         currShowing: this.state.albums.slice(0, number),
       });
     }
+
   }
 
   showMoreLess(event) {
-    // TODO: need to make it so all albums exist no matter what but are only visible when showing more
     if (this.state.showMore === false) {
-      // if it's currently showing twelve make it show all of the albums and change the text
+      // if it's currently showing twelve (or less if the screen is smaller) make it show all of the albums and change the text
       this.setState({
         showMore: true,
         showMoreText: 'SHOW LESS',
@@ -130,7 +134,7 @@ class AlbumList extends React.Component {
         showMoreArrow: <AiOutlineUp id="album-up-arrow" />,
       });
     } else {
-      // if it's currently showing all the albums make it only show 12 and change the text
+      // if it's currently showing all the albums make it only show 12 (numToShow) and change the text
       this.setState({
         showMore: false,
         showMoreText: 'SHOW MORE',
