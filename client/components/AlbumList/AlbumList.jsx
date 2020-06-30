@@ -106,10 +106,17 @@ class AlbumList extends React.Component {
     } else {
       number = 12;
     }
-    this.setState({
-      numToShow: number,
-      currShowing: this.state.albums.slice(0, number),
-    });
+    if (this.state.showMore === true) {
+      this.setState({
+        numToShow: number,
+        currShowing: this.state.albums,
+      });
+    } else {
+      this.setState({
+        numToShow: number,
+        currShowing: this.state.albums.slice(0, number),
+      });
+    }
   }
 
   showMoreLess(event) {
