@@ -47,17 +47,7 @@ app.get('/albums/features/:artistId', (req, res) => {
       res.send(err);
     });
 });
-app.get('/albums/byId/:albumId', (req, res) => {
-  db.Album.findOne({ _id: req.params.albumId })
-    .then((albums) => {
-      // console.log('in the then', albums);
-      res.send(albums);
-    })
-    .catch((err) => {
-      // console.log(err);
-      res.send(err);
-    });
-});
+
 app.get('/songs/byAlbum/:albumId', (req, res) => {
   db.Album.findOne({ _id: req.params.albumId }) // finds the album by id
     .then((album) => {
@@ -85,3 +75,5 @@ app.get('/songs/byAlbum/:albumId', (req, res) => {
 app.listen(PORT, () => {
   console.log('listening on port', PORT);
 });
+
+module.exports = app;

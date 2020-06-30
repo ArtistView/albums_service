@@ -1,8 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
-import Album from '../Album/Album.jsx';
 import styled, { css } from 'styled-components';
 import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
+import Album from '../Album/Album.jsx';
 
 const AlbumListWrapper = styled.div`
   padding-left: 10px;
