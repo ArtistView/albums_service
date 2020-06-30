@@ -88,7 +88,7 @@ class AlbumList extends React.Component {
       });
     }
 
-    window.addEventListener("resize", this.updateNumShowing);
+    window.addEventListener('resize', this.updateNumShowing);
     // should set the state to hold the albums of the artist of the correct type
   }
   // need to write tests
@@ -150,6 +150,7 @@ class AlbumList extends React.Component {
           <AlbumListTitle className="album-list-title">{this.state.type}</AlbumListTitle>
           <div className="album-list-list">
             {this.state.albums.map((album) => {
+              // want to rerun this map function when currShowing changes
               let showing = false;
               if (this.state.currShowing.includes(album)) {
                 showing = true;
