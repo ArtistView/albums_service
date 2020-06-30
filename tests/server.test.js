@@ -2,40 +2,40 @@ const supertest = require('supertest');
 const app = require('../server/server.js');
 
 const firstAlbum = {
-  "songs": [
-      "5eebfe07a386ca12ede16e2c",
-      "5eebfe07a386ca12ede16e90",
-      "5eebfe07a386ca12ede16e2c",
-      "5eebfe07a386ca12ede16e90",
-      "5eebfe07a386ca12ede16e2c",
-      "5eebfe07a386ca12ede16e90"
+  songs: [
+    '5eebfe07a386ca12ede16e2c',
+    '5eebfe07a386ca12ede16e90',
+    '5eebfe07a386ca12ede16e2c',
+    '5eebfe07a386ca12ede16e90',
+    '5eebfe07a386ca12ede16e2c',
+    '5eebfe07a386ca12ede16e90',
   ],
-  "featuredArtists": [],
-  "_id": "5eebdcc17b996d0c47797eb0",
-  "title": "Squarepants",
-  "artistId": "5eebdbf1bf2d490c13ff868d",
-  "type": "EP",
-  "imageUrl": "https://tinyurl.com/ya65klnb",
-  "__v": 0
+  featuredArtists: [],
+  _id: '5eebdcc17b996d0c47797eb0',
+  title: 'Squarepants',
+  artistId: '5eebdbf1bf2d490c13ff868d',
+  type: 'EP',
+  imageUrl: 'https://tinyurl.com/ya65klnb',
+  __v: 0,
 };
 const firstFeature = {
-  "songs": [
-      "5eebfe07a386ca12ede16e2f",
-      "5eebfe07a386ca12ede16e93",
-      "5eebfe07a386ca12ede16e2f",
-      "5eebfe07a386ca12ede16e93",
-      "5eebfe07a386ca12ede16e2f",
-      "5eebfe07a386ca12ede16e93"
+  songs: [
+    '5eebfe07a386ca12ede16e2f',
+    '5eebfe07a386ca12ede16e93',
+    '5eebfe07a386ca12ede16e2f',
+    '5eebfe07a386ca12ede16e93',
+    '5eebfe07a386ca12ede16e2f',
+    '5eebfe07a386ca12ede16e93',
   ],
-  "featuredArtists": [
-      "5eebdbf1bf2d490c13ff868d"
+  featuredArtists: [
+    '5eebdbf1bf2d490c13ff868d',
   ],
-  "_id": "5eebecb1969c0a0fa4e0ce45",
-  "title": "aliquam",
-  "imageUrl": "https://tinyurl.com/yc9dd4jq",
-  "artistId": "5eebe7b2c451ef0e3f4c0533",
-  "__v": 0,
-  "type": "album"
+  _id: '5eebecb1969c0a0fa4e0ce45',
+  title: 'aliquam',
+  imageUrl: 'https://tinyurl.com/yc9dd4jq',
+  artistId: '5eebe7b2c451ef0e3f4c0533',
+  __v: 0,
+  type: 'album',
 };
 const songsList = [
   'https://fakespotify.s3-us-west-1.amazonaws.com/Intro+-+J.+Cole.mp3',
