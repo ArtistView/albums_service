@@ -78,9 +78,6 @@ class Album extends React.Component {
   }
 
   componentDidMount() {
-    // if ($(window).width() < 1200) {
-    //   this.updateSizing();
-    // } // this is not really important but right now doing this crashed the whole page
     this.getSongs(this.props.album._id);
     // upon loading the component it gets the list of mp3 and sets them in state
     window.addEventListener('resize', this.updateSizing);

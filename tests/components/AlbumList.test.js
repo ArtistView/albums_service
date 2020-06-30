@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 import ReactDom from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
 import AlbumList from '../../client/components/AlbumList/AlbumList.jsx';

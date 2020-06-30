@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import Promise from 'bluebird';
 import styled, { css } from 'styled-components';
 import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
 import Album from '../Album/Album.jsx';
@@ -45,15 +46,21 @@ class AlbumList extends React.Component {
     };
     this.showMoreLess = this.showMoreLess.bind(this);
     this.updateNumShowing = this.updateNumShowing.bind(this);
+    this.populateAlbums = this.populateAlbums.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // upon loading we loop through all the albums from the artist and add only the ones that match our type to the array, which is then set to be albums in state
-    // if ($(window).width() < 1200) {
-    //   this.updateNumShowing();
-    //   // idk why this isn't updating the number based on the screen size initially
-    // }
-    // trying to update the number shown immediately if it is rendered on a smaller screen, only updates once the size changes right now
+    if ($(window).width() < 1200) {
+      await this.updateNumShowing();
+      this.populateAlbums();
+    } else {
+      this.populateAlbums();
+    }
+  }
+  // need to write tests
+
+  populateAlbums() {
     let albumsOfType = [];
     if (this.state.type === 'Appears On') {
       albumsOfType = this.props.albums;
@@ -93,9 +100,7 @@ class AlbumList extends React.Component {
       });
     }
     window.addEventListener('resize', this.updateNumShowing);
-    // adds an event listener that fixes show more/less as the window size changes
   }
-  // need to write tests
 
   updateNumShowing() {
     // set number to be the number of elements shown in the first two rows
