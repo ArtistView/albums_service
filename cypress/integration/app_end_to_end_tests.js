@@ -24,18 +24,8 @@ describe('My App Tests', () => {
   });
   it('contains at least one album', () => {
     cy.contains(/Albums|Singles and EPs|Collaborations|Appears On/g);
-    // check if the app contains any of those texts
+    // checks if the app contains any of those texts
   });
-  // TODO: figure out how to change css on hover and test it
-  // it('album cover gets darker on hover', () => {
-  //   cy.get('#album-cover').first().should('have.css', 'opacity', '1'); // the album cover should start with an opacity of one when it's not hovered over
-  //   cy.get('.album').first().invoke('mouseover') // hovering over the first album
-  //     .then(cy.get('#album-cover').should('have.css', 'opacity', '.5')); // check if the opacity changed
-  //   // dont think i can even test this because hover using trigger doesn't change the css
-  //   // cy.get('.album').first().trigger('mouseleave'); // stop hovering over the first album
-  //   cy.get('#album-cover').first().should('have.css', 'opacity', '1'); // check if the opacity changed back
-  // });
-  // TODO: check other hovers, like the play and the title underline once I figure out the hover stuff
   it('play/pause toggles on click of the button', () => { // check if the play button switches to pause on click
     cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play at first
     cy.get('#play-button').click({ force: true }); // clicks the button (force must be true bc it only turns visible on hover and this doesn't mess with css)
@@ -55,14 +45,7 @@ describe('My App Tests', () => {
     cy.get('.album').eq(1).find('#play-button').click({ force: true }); // click on pause on second album
     cy.get('.album').eq(1).find('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if the second album shows play again
   });
-  // TODO: test if the audio is being played (and if it's the right audio) upon the click of the play/pause button
-  // it('play/pause toggles turns on and off audio', () => { // instead of checking the images check the audio here
-  //   // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play at first
-  //   cy.get('#play-button').click({ force: true }); // clicks the button (force must be true bc it only turns visible on hover and this doesn't mess with css)
-  //   // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[1]); // checks if it shows pause
-  //   cy.get('#play-button').click({ force: true }); // changes it back
-  //   // cy.get('#play-button').should('have.attr', 'src').should('include', playPauseList[0]); // checks if it shows play again
-  // });
+  // TODO (maybe): test if the audio is being played (and if it's the right audio) upon the click of the play/pause button
   it('Album keeps playing when collapsed and reopened with show more/less button', () => {
     let index = 0;
     cy.get('.album-list').each(() => { // for each album list

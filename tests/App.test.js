@@ -1,10 +1,15 @@
 import React from 'react';
+import ReactDom from 'react-dom';
 import {shallow, mount} from 'enzyme';
 // import App from '../client/App.jsx';
+// import AlbumList from '../../client/components/AlbumList/AlbumList.jsx';
 
 describe('App', () => {
-  it('shole be true', () => {
-    const foo = true;
-    expect(foo).toBe(true);
+  it('renders correctly', () => {
+    // TODO
   });
+  it('has at least one album list', () => {
+    // TODO
+  });
+  // maybe add more tests about the state
 });

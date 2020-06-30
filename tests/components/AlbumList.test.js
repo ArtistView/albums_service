@@ -3,6 +3,7 @@ import $ from 'jquery';
 import ReactDom from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
 import AlbumList from '../../client/components/AlbumList/AlbumList.jsx';
+import Album from '../../client/components/Album/Album.jsx';
 
 const albums = [
   {
@@ -31,15 +32,21 @@ const albums = [
 // };
 // getAlbums();
 describe('AlbumList', () => {
-  it('has album as a prop', () => {
-    // fill in test later
-  });
+  const wrapper = shallow(<AlbumList albums={albums} />);
   it('renders without crashing', () => {
-    const wrapper = shallow(<AlbumList albums={albums} />);
     // make sure that as we add more props to album we ensure that they are correct here
     // console.log('album is', wrapper);
     expect(wrapper.exists()).toBe(true);
   });
+  it('has a title', () => {
+    // fill in test later
+    expect(wrapper.find('.album-list-title')).to.have.lengthOf(1);
+    expect(wrapper.find('.album-list-title').text()).toMatch(/Albums|Singles and EPs|Collaborations|Appears On/g);
+  });
+  it('has at least one album', () => {
+    // TODO
+  });
+  // maybe add more tests about the state and props
   // implement snapshot testing once I know more what it is going to look like
   // once I implement show more/less feature use a test structure like the one below to check it
   // expect(wrapper.text()).toEqual('Show More');
