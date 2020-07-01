@@ -11,7 +11,7 @@ const AlbumListWrapper = styled.div`
 `;
 
 const AlbumListTitle = styled.div`
-  font-size: x-large;
+  font-size: 28px;
   padding-top: 65px;
   margin-bottom: 20px;
   margin-left: 10px;
