@@ -6,7 +6,7 @@ import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
 import Album from '../Album/Album.jsx';
 
 const AlbumListWrapper = styled.div`
-  padding-left: 10px;
+  padding-left: 25px;
   background-color: #151515;
 `;
 
