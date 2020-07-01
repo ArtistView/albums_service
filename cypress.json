@@ -1,1 +1,4 @@
-{}
+{
+  "experimentalComponentTesting": true,
+  "componentFolder": "client/components"
+}

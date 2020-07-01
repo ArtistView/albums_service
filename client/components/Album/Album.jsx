@@ -109,7 +109,7 @@ class Album extends React.Component {
       // this changes it to showing but it keeps these style settings permanently, won't change it back to the defaults when I press pause
     }
     if(this.props.show === true) {
-      this.updateSizing();
+      this.updateSizing(); // changes the sizing to match the screen size
     }
   }
 
@@ -118,21 +118,14 @@ class Album extends React.Component {
     fetch(url) // fetches the list of mp3s for the given album
       .then((response) => response.json())
       .then((data) => {
-        if (this.props.album.title === 'The Squarepants V' || this.props.album.title === 'The Squarepants') {
-          console.log(this.props.album.title, '\'s songs are', data);
-        }
         this.setState({
           audioList: data,
         });
       })
       .then(() => {
-        if (this.props.album.title === 'The Squarepants V' || this.props.album.title === 'The Squarepants') {
-          console.log(this.props.album.title, '\'s audio is', this.state.audio);
-        }
         this.setState({
           audio: new Audio(this.state.audioList[this.state.currSongIndex]),
         });
-        // console.log('audio list for',this.props.album.title, this.state.audioList);
         this.state.audio.addEventListener('ended', () => {
           this.playNext(); // add event listener to the audio that plays the next song once it ends
         });
@@ -144,27 +137,22 @@ class Album extends React.Component {
 
   play(event) {
     // on click of the play button, we toggle the play and pause images and implement functionality and styling
-    // need to actually implement the play/pause music functionality by grabbing the mp3 from currently playing and playing it
-    // console.log('current song', this.state.currSongIndex, this.state.audio, 'list of songs', this.state.audioList, 'song id list', this.props.album.songs);
+    // also plays/pauses audio on click
     if (this.state.playing === false) {
       event.target.style.display = 'block'; // makes the pause button persist even after hover
       this.props.startPlaying(this.props.album._id); // changes the global state to be playing this album
-      // this.props.updateAudio(this.state.audio, this.state.currSongIndex); // update the global state
       // this will trigger any other album that is playing to stop through the componentDidUpdate method
       this.refs.albumcover.style.opacity = 0.5; // the album cover will stay darker when the pause is showing as if it was being hovered over
       this.state.audio.play(); // plays the audio from the mp3 file for the current song
-      // at the end of the song we need to set the currSongIndex to increment by 1 and set the audio file to the next one in the list
-      // use ended event and then call getSong for the next song and play it.
       this.setState({
         playing: true,
         buttonIndex: 1,
       });
     } else {
-      console.log('pausing', event.target);
       event.target.style.display = '';
       this.refs.albumcover.style.opacity = '';
       // the above two lines make the play button return to normal hover behavior as we set in css
-      this.state.audio.pause(); // pauser the current mp3 file upon clicking the pause button
+      this.state.audio.pause(); // pauses the current mp3 file upon clicking the pause button
       this.setState({
         playing: false,
         buttonIndex: 0,
@@ -190,7 +178,6 @@ class Album extends React.Component {
       this.state.audio.addEventListener('ended', () => {
         this.playNext();
       });
-      // this.props.updateAudio(this.state.audio, this.state.currSongIndex); // update the global state
       // makes the play button return to normal hover behavior as we set in css
     } else {
       // if there are more songs in the list play the next song (which was incremented before the else)
@@ -201,15 +188,13 @@ class Album extends React.Component {
       this.state.audio.addEventListener('ended', () => {
         this.playNext();
       });
-      // this.props.updateAudio(this.state.audio, this.state.currSongIndex); // update the global state
     }
   }
 
   updateSizing() {
     // set number to be the number of elements shown in the first two rows
-    // does not like the extra elements when I move the screen around, stops showing them
-    let percentPerAlbum = 16.66;
-    let width = $(window).width();
+    let percentPerAlbum = 0;
+    const width = $(window).width();
     if (width > 1040 && width < 1200) {
       percentPerAlbum = 21;
     } else if (width < 1040 && width > 850) {
@@ -225,7 +210,6 @@ class Album extends React.Component {
       return;
     }
     let size = (width - 232) * (percentPerAlbum / 100);
-    // console.log(size);
     this.refs.albumwrapper.style.width = size;
     this.refs.albumcoverwrapper.style.height = size;
     this.refs.albumcoverwrapper.style.width = size;

@@ -1,8 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
-import Album from '../Album/Album.jsx';
+import Promise from 'bluebird';
 import styled, { css } from 'styled-components';
 import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
+import Album from '../Album/Album.jsx';
 
 const AlbumListWrapper = styled.div`
   padding-left: 10px;
@@ -45,10 +46,22 @@ class AlbumList extends React.Component {
     };
     this.showMoreLess = this.showMoreLess.bind(this);
     this.updateNumShowing = this.updateNumShowing.bind(this);
+    this.populateAlbums = this.populateAlbums.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // upon loading we loop through all the albums from the artist and add only the ones that match our type to the array, which is then set to be albums in state
+    if ($(window).width() < 1200) {
+      await this.updateNumShowing();
+      // if the screen is smaller, update the number and wait for it to finish before moving on
+    }
+    this.populateAlbums();
+    // populate the state with the correct albums
+  }
+  // need to write tests
+
+  populateAlbums() {
+    // populates the state with albums that match the type
     let albumsOfType = [];
     if (this.state.type === 'Appears On') {
       albumsOfType = this.props.albums;
@@ -87,16 +100,14 @@ class AlbumList extends React.Component {
         showMoreArrow: <AiOutlineDown id="album-down-arrow" />,
       });
     }
-
     window.addEventListener('resize', this.updateNumShowing);
-    // adds an event listener that fixes show more/less as the window size changes
+    // adds an event listener that updates the number of albums showing if the window resizes
   }
-  // need to write tests
 
   updateNumShowing() {
     // set number to be the number of elements shown in the first two rows
     let number = 12;
-    let width = $(window).width();
+    const width = $(window).width();
     if (width > 1040 && width < 1200) {
       number = 8;
     } else if (width < 1040 && width > 850) {
@@ -117,12 +128,12 @@ class AlbumList extends React.Component {
         currShowing: this.state.albums.slice(0, number),
       });
     }
+
   }
 
   showMoreLess(event) {
-    // TODO: need to make it so all albums exist no matter what but are only visible when showing more
     if (this.state.showMore === false) {
-      // if it's currently showing twelve make it show all of the albums and change the text
+      // if it's currently showing twelve (or less if the screen is smaller) make it show all of the albums and change the text
       this.setState({
         showMore: true,
         showMoreText: 'SHOW LESS',
@@ -130,7 +141,7 @@ class AlbumList extends React.Component {
         showMoreArrow: <AiOutlineUp id="album-up-arrow" />,
       });
     } else {
-      // if it's currently showing all the albums make it only show 12 and change the text
+      // if it's currently showing all the albums make it only show 12 (numToShow) and change the text
       this.setState({
         showMore: false,
         showMoreText: 'SHOW MORE',
@@ -153,7 +164,7 @@ class AlbumList extends React.Component {
               if (this.state.currShowing.includes(album)) {
                 showing = true;
               }
-              return (<Album album={album} id={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} show={showing} />);
+              return (<Album album={album} key={album._id} id={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} show={showing} />);
             })
             }
           </div>
