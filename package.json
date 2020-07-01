@@ -26,6 +26,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
+    "sinon": "^9.0.2",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
@@ -48,6 +49,8 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "jest": "^26.0.1",
     "jest-fetch-mock": "^3.0.3",
+    "jsdom": "16.2.2",
+    "jsdom-global": "3.0.2",
     "react-test-renderer": "^16.13.1",
     "supertest": "^4.0.2",
     "webpack": "^4.43.0",

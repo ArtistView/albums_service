@@ -164,7 +164,7 @@ class AlbumList extends React.Component {
               if (this.state.currShowing.includes(album)) {
                 showing = true;
               }
-              return (<Album album={album} id={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} show={showing} />);
+              return (<Album album={album} key={album._id} id={album._id} startPlaying={this.props.playing} currPlaying={this.props.currPlaying} show={showing} />);
             })
             }
           </div>
