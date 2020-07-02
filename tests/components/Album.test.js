@@ -7,9 +7,6 @@ import ReactDom from 'react-dom';
 import Enzyme, { shallow, mount, render } from 'enzyme';
 import Album from '../../client/components/Album/Album.jsx';
 import {fetch} from 'whatwg-fetch';
-// import Adaptor from 'enzyme-adaptor-react-16';
-
-// Enzyme.configure({ adaptor: new Adaptor() });
 
 const album = {
   title: 'spongebob',
@@ -31,12 +28,6 @@ describe('Album', () => {
   });
   // maybe test the props
   // expect(wrapper.props.someProp).toEqual(1);
-  it('changes opacity on hover and shows play button', () => {
-    // TODO
-  });
-  it('displays an album title and underlines it on hover', () => {
-    // TODO
-  });
   // the coverage is pretty low on this one but I pretty much cover all the rest of the lines and functions in my end to end testing through cypress
   // the play functionality is not really tested as inn actual spotify it would be abstracted out of my component
 })

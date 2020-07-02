@@ -5,16 +5,6 @@ import React from 'react';
 import sinon from 'sinon';
 import ReactDom from 'react-dom';
 import { shallow, mount, render, configure } from 'enzyme';
-// import Adapter from 'enzyme-adapter-react-16';
-// import API mocking utilities from Mock Service Worker
-// import { rest } from 'msw';
-// import { setupServer } from 'msw/node';
-
-// // import react-testing methods
-// import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-
-// // add custom jest matchers from jest-dom
-// import '@testing-library/jest-dom/extend-expect';
 import AlbumList from '../../client/components/AlbumList/AlbumList.jsx';
 import Album from '../../client/components/Album/Album.jsx';
 
@@ -31,17 +21,13 @@ const albums = [
   },
 ];
 const noop = () => {};
-// configure({ adapter: new Adapter() });
-// const { container, asFragment } = render(<AlbumList type="Albums" albums={albums} playing={albums[0]._id} currPlaying={noop} />);
 describe('AlbumList', () => {
   const wrapper = shallow(<AlbumList type="Albums" albums={albums} playing={albums[0]._id} currPlaying={noop} />);
-  // const wrapper = mount(<AlbumList type="Albums" albums={albums} playing={albums[0]._id} currPlaying={noop} />);
   it('should render correctly in "debug" mode', () => {
     const component = shallow(<AlbumList debug />);
     expect(component).toMatchSnapshot();
   });
   it('should render correctly with props', () => {
-    // const component = mount(<CommunityDetails listing={fakeData.communityAndNeighborhoodDetails} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('has state', () => {
