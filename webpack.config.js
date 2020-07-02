@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: path.join(__dirname, '/client', '/App.jsx'),
+  entry: path.join(__dirname, 'client', 'index.jsx'),
   // __dirname + '/client/App.jsx'
   module: {
     rules: [

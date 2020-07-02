@@ -5,7 +5,6 @@ import React from 'react';
 import sinon from 'sinon';
 import ReactDom from 'react-dom';
 import { shallow, mount, render, configure } from 'enzyme';
-// import Adapter from 'enzyme-adapter-react-16';
 import AlbumList from '../../client/components/AlbumList/AlbumList.jsx';
 import Album from '../../client/components/Album/Album.jsx';
 
@@ -22,29 +21,22 @@ const albums = [
   },
 ];
 const noop = () => {};
-// configure({ adapter: new Adapter() });
 describe('AlbumList', () => {
   const wrapper = shallow(<AlbumList type="Albums" albums={albums} playing={albums[0]._id} currPlaying={noop} />);
-  // const wrapper = mount(<AlbumList type="Albums" albums={albums} playing={albums[0]._id} currPlaying={noop} />);
-  it('renders without crashing', () => {
-    // make sure that as we add more props to album we ensure that they are correct here
-    // console.log('album is', wrapper);
-    expect(wrapper.exists()).toBe(true);
+  it('should render correctly in "debug" mode', () => {
+    const component = shallow(<AlbumList debug />);
+    expect(component).toMatchSnapshot();
   });
-  it('has a title', () => {
-    // fill in test later
-    const title = wrapper.find('div[className=".album-list-title"]');
-    console.log('title is', title);
-    expect(title).to.have.lengthOf(1);
-    expect(wrapper.find('div.album-list-title').text()).toMatch(/Albums|Singles and EPs|Collaborations|Appears On/g);
+  it('should render correctly with props', () => {
+    expect(wrapper).toMatchSnapshot();
   });
-  it('has at least one album', () => {
-    // TODO
+  it('has state', () => {
+    expect(wrapper.state('type')).toBe('Albums');
+    expect(wrapper.state('showMore')).toBe(false);
+    expect(wrapper.state('showMoreText')).toBe('');
+    expect(wrapper.state('showMoreArrow')).toBe('');
   });
-  // maybe add more tests about the state and props
-  // implement snapshot testing once I know more what it is going to look like
-  // once I implement show more/less feature use a test structure like the one below to check it
-  // expect(wrapper.text()).toEqual('Show More');
-  // wrapper.find('showMore').simulate('change');
-  // expect(wrapper.text()).toEqual('Show Less');
+  // maybe test the props
+  // expect(wrapper.props.someProp).toEqual(1);
+  // the coverage is ok on this one but I pretty much cover all the rest of the lines and functions in my end to end testing through cypress
 });

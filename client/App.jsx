@@ -22,8 +22,6 @@ class App extends React.Component {
       features: [], // set to an empty array initially, represents the ablums that the artist appears on
       isLoaded: false, // used for conditional rendering to make sure the fetch has completed before rendering
       playing: '', // need to know which album is playing so all other albums can be set to stop playing
-      // currSongIndex: 0, // stores the number of the song in the list
-      // currAudio: new Audio(''), // stores the currently playing audio file
     };
     this.getAlbums = this.getAlbums.bind(this);
     this.getFeatures = this.getFeatures.bind(this);
@@ -51,7 +49,6 @@ class App extends React.Component {
       .catch((err) => {
         console.error(err);
       });
-    // need to write tests for this
   }
 
   getFeatures(artist) {
@@ -69,15 +66,7 @@ class App extends React.Component {
       .catch((err) => {
         console.error(err);
       });
-    // need to write tests for this
   }
-
-  // updateAudio(audio, index) {
-  //   this.setState({
-  //     currAudio: audio,
-  //     currSongIndex: index,
-  //   });
-  // }
 
   playing(album) {
     // this method will be passed as a prop to the lower components so they can change this global state
@@ -101,8 +90,10 @@ class App extends React.Component {
     return (
       <div />
     );
-
   }
 }
 
-ReactDom.render(<App />, document.getElementById('albumservice'));
+// ReactDom.render(<App />, document.getElementById('albumservice'));
+// this is messing up my tests
+
+export default App;
