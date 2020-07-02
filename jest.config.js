@@ -188,9 +188,4 @@ module.exports = {
   // },
   setupFilesAfterEnv: ['./test-setup.js'],
   verbose: true,
-  // collectCoverageFrom: [
-  //   "**/*.{js,jsx}",
-  //   "!**/node_modules/**",
-  //   "!**/vendor/**"
-  // ],
 };

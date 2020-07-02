@@ -44,5 +44,13 @@ describe('AlbumList', () => {
     // const component = mount(<CommunityDetails listing={fakeData.communityAndNeighborhoodDetails} />);
     expect(wrapper).toMatchSnapshot();
   });
+  it('has state', () => {
+    expect(wrapper.state('type')).toBe('Albums');
+    expect(wrapper.state('showMore')).toBe(false);
+    expect(wrapper.state('showMoreText')).toBe('');
+    expect(wrapper.state('showMoreArrow')).toBe('');
+  });
+  // maybe test the props
+  // expect(wrapper.props.someProp).toEqual(1);
   // the coverage is ok on this one but I pretty much cover all the rest of the lines and functions in my end to end testing through cypress
 });

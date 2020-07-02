@@ -24,6 +24,13 @@ describe('Album', () => {
   it('should render correctly with props', () => {
     expect(wrapper).toMatchSnapshot();
   });
+  it('has state', () => {
+    expect(wrapper.state('playing')).toBe(false);
+    expect(wrapper.state('buttonIndex')).toBe(0);
+    expect(wrapper.state('currSongIndex')).toBe(0);
+  });
+  // maybe test the props
+  // expect(wrapper.props.someProp).toEqual(1);
   it('changes opacity on hover and shows play button', () => {
     // TODO
   });

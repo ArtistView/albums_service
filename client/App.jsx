@@ -51,7 +51,6 @@ class App extends React.Component {
       .catch((err) => {
         console.error(err);
       });
-    // need to write tests for this
   }
 
   getFeatures(artist) {
@@ -69,15 +68,7 @@ class App extends React.Component {
       .catch((err) => {
         console.error(err);
       });
-    // need to write tests for this
   }
-
-  // updateAudio(audio, index) {
-  //   this.setState({
-  //     currAudio: audio,
-  //     currSongIndex: index,
-  //   });
-  // }
 
   playing(album) {
     // this method will be passed as a prop to the lower components so they can change this global state
