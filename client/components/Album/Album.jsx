@@ -222,7 +222,7 @@ class Album extends React.Component {
     // also renders an album title underneath that underlines on hover but doesn't have clickable functionality as that is outside the scope of the artist page, theoretically in actual spotify a click will take you to the album's page though
     if (this.props.show) { // if it should be showing
       return (
-        <AlbumWrapper ref="albumwrapper" className="album" id={this.props.key}>
+        <AlbumWrapper ref="albumwrapper" className="album" id={this.props.id}>
           <AlbumCoverWrapper ref="albumcoverwrapper" id="album-cover-wrapper">
             <AlbumCover ref="albumcover" id="album-cover" src={this.props.album.imageUrl} alt="" />
             <PlayButton ref="playbutton" id="play-button" src={this.state.buttonUrls[this.state.buttonIndex]} alt="" onClick={this.play} />

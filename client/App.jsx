@@ -106,3 +106,6 @@ class App extends React.Component {
 }
 
 ReactDom.render(<App />, document.getElementById('albumservice'));
+// this is messing up my tests
+
+export default App;

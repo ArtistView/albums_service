@@ -187,4 +187,10 @@ module.exports = {
   //   \\.(scss|sass|css)$: "identity-obj-proxy"
   // },
   setupFilesAfterEnv: ['./test-setup.js'],
+  verbose: true,
+  // collectCoverageFrom: [
+  //   "**/*.{js,jsx}",
+  //   "!**/node_modules/**",
+  //   "!**/vendor/**"
+  // ],
 };
