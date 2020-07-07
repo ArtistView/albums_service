@@ -36,7 +36,11 @@ describe('AlbumList', () => {
     expect(wrapper.state('showMoreText')).toBe('');
     expect(wrapper.state('showMoreArrow')).toBe('');
   });
-  // maybe test the props
-  // expect(wrapper.props.someProp).toEqual(1);
+  it('recieves the correct props', () => {
+    expect(wrapper.instance().props.albums).toEqual(albums);
+    expect(wrapper.instance().props.playing).toBe(albums[0]._id);
+    expect(wrapper.instance().props.currPlaying).toBe(noop);
+    expect(wrapper.instance().props.type).toBe("Albums");
+  });
   // the coverage is ok on this one but I pretty much cover all the rest of the lines and functions in my end to end testing through cypress
 });

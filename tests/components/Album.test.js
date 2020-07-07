@@ -26,8 +26,13 @@ describe('Album', () => {
     expect(wrapper.state('buttonIndex')).toBe(0);
     expect(wrapper.state('currSongIndex')).toBe(0);
   });
-  // maybe test the props
-  // expect(wrapper.props.someProp).toEqual(1);
+  it('recieves the correct props', () => {
+    expect(wrapper.instance().props.album).toEqual(album);
+    expect(wrapper.instance().props.id).toBe(album._id);
+    expect(wrapper.instance().props.currPlaying).toBe(album._id);
+    expect(wrapper.instance().props.startPlaying).toBe(noop);
+    expect(wrapper.instance().props.show).toBe(true);
+  });
   // the coverage is pretty low on this one but I pretty much cover all the rest of the lines and functions in my end to end testing through cypress
   // the play functionality is not really tested as inn actual spotify it would be abstracted out of my component
 })

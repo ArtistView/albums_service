@@ -64,7 +64,9 @@ class Album extends React.Component {
     this.myRef = React.createRef();
     this.state = {
       playing: false, // tracking if the album is currently playing
-      buttonUrls: ['https://fakespotify.s3-us-west-1.amazonaws.com/play-button-2.png', 'https://fakespotify.s3-us-west-1.amazonaws.com/pause-button-try-3.png'],
+      buttonUrls: ['https://fakespotify.s3-us-west-1.amazonaws.com/play-button-2.png', 'https://fakespotify.s3-us-west-1.amazonaws.com/pause-button-try-3.png'], // array of the play and puase button images from my S3
+      // buttonUrls: ['https://www.pngfind.com/pngs/m/427-4277341_add-play-button-to-image-online-overlay-play.png', 'https://tinyurl.com/ybdhlhsl'], // array of play and pause button images not through S3, doesn't look like spotify but it won't charge me, uncomment this and comment the line above for SDC bc those images won't be available
+      // functionality remains intact
       // list of links to my play and pause icons
       buttonIndex: 0, // which icon (play (0) or pause(1)) is currently showing, used to access the links from buttonUrls array
       currSongIndex: 0, // stores the index of the current song to be played within the songs array of the album
