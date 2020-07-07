@@ -1,3 +1,7 @@
+#albumservice{
+  margin-left: 220px;
+  /* this is only included in here to make the resizing work correctly, within the proxy, this margin is done on the whole body  */
+}
 #album-up-arrow{
   /* maybe try and refactor to styled icons later  */
   font-size: 18px;
