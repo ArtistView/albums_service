@@ -1,6 +1,6 @@
-# Project Name
+Fake Spotify
 
-> Project description
+A fullstack clone of spotify's artist page. This repository is for the albums component of the page.
 
 ## Related Projects
 
