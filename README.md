@@ -6,7 +6,7 @@ ArtistView is a full stack application that provides users a seemless way to bro
 
   - https://github.com/ArtistView/controller-bar
   - https://github.com/ArtistView/top_songs_service
-  - https://github.com/AristView/album_proxy
+  - https://github.com/AristView/albums_proxy
 
 ## Table of Contents
 
