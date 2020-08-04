@@ -1,4 +1,4 @@
-ArtistView
+#ArtistView
 
 ArtistView is a full stack application that provides users a seemless way to browse through an artist's songs and albums. Each page is dedicated to one specific artist. The application has fully functioning audio capabilities.
 
