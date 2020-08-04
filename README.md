@@ -1,30 +1,24 @@
-Fake Spotify
+ArtistView
 
-A fullstack clone of spotify's artist page. This repository is for the albums component of the page.
+ArtistView is a full stack application that provides users a seemless way to browse through an artist's songs and albums. Each page is dedicated to one specific artist. The application has fully functioning audio capabilities.
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/ArtistView/controller-bar
+  - https://github.com/ArtistView/top_songs_service
+  - https://github.com/AristView/albums_proxy
 
 ## Table of Contents
 
-1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
-
-## Usage
-
-> Some usage instructions
 
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- etc
+- Nodemon
 
 ## Development
 
@@ -35,4 +29,6 @@ From within the root directory:
 ```sh
 npm install -g webpack
 npm install
+npm run react-dev
+npm start
 ```
