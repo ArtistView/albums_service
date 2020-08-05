@@ -20,7 +20,7 @@ This repository holds the albums component. The component classifies albums by v
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- Nodemon
+- Nodemon 2.0.4
 
 ## Development
 
